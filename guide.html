@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#7b2d4e">
+<title>دليل لولا</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf6f0;--card:#fffdfa;--ink:#33222a;--mute:#86747a;--main:#7b2d4e;--gold:#b8893b;--soft:#f5e6ea;--ok:#2f7d5b;--bad:#b3392f;--line:#ecdcd2;--water:#4aa3d8}
+@media (prefers-color-scheme:dark){:root{--bg:#1c1316;--card:#271b1f;--ink:#f6ebe8;--mute:#b9a5a9;--main:#e8a0bd;--gold:#e0b565;--soft:#3a2530;--ok:#6fcba0;--bad:#f08a80;--line:#42303a;--water:#69b9e8}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{overflow-x:hidden;background:var(--bg)}
+body{margin:0;color:var(--ink);font-family:Cairo,"Segoe UI",Tahoma,sans-serif;line-height:1.7;min-height:100vh;padding-bottom:96px;overflow-x:hidden;
+ background:radial-gradient(60% 40% at 90% 0%,var(--soft),transparent 70%),radial-gradient(50% 35% at 0% 100%,rgba(184,137,59,.16),transparent 70%),var(--bg);background-attachment:fixed}
+.petals{position:fixed;inset:0;overflow:hidden;z-index:-1;pointer-events:none}
+.petal{position:absolute;top:-30px;border-radius:150% 0 150% 0;background:linear-gradient(135deg,var(--soft),#e8a0bd);opacity:.5;animation:drift linear infinite}
+@keyframes drift{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(40px,55vh) rotate(180deg)}100%{transform:translate(-30px,112vh) rotate(380deg)}}
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes shine{to{background-position:-250% 0}}
+header{padding:18px 16px 4px;max-width:560px;margin:auto}
+.brand{display:flex;justify-content:space-between;align-items:center;font-family:Amiri,serif;font-size:1.5rem;color:var(--main)}
+.brand small{font-family:Cairo;font-size:.8rem;color:var(--mute)}
+#dots{display:flex;gap:5px;margin-top:10px}
+#dots i{flex:1;height:5px;border-radius:4px;background:var(--soft);overflow:hidden;position:relative}
+#dots i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--main),var(--gold));transform:scaleX(0);transform-origin:right;transition:transform .6s cubic-bezier(.3,.9,.3,1)}
+#dots i.on::after,#dots i.done::after{transform:scaleX(1)}
+main{max-width:560px;margin:auto;padding:0 16px;perspective:1000px}
+.slide{padding-top:10px}
+.slide.next{animation:inN .55s cubic-bezier(.2,.9,.2,1) both}
+.slide.prev{animation:inP .55s cubic-bezier(.2,.9,.2,1) both}
+@keyframes inN{from{opacity:0;transform:translateX(-60px) rotateY(-10deg)}to{opacity:1;transform:none}}
+@keyframes inP{from{opacity:0;transform:translateX(60px) rotateY(10deg)}to{opacity:1;transform:none}}
+.slide>*{animation:up .6s both}
+h2{font-family:Amiri,serif;font-size:2rem;line-height:1.3;margin:6px 0 4px;color:var(--main)}
+p{margin:0 0 12px}
+.sub{color:var(--mute)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:16px;margin:12px 0;box-shadow:0 14px 34px -22px rgba(123,45,78,.5)}
+.center{text-align:center}
+.big{font-family:Amiri,serif;font-size:5rem;line-height:1;display:flex;justify-content:center;align-items:center;gap:14px;margin:14px 0 0;color:var(--main)}
+.big .gold{background:linear-gradient(110deg,var(--gold) 30%,#fff3c8 50%,var(--gold) 70%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 2.5s linear infinite}
+.big i{font-style:normal;color:var(--gold);animation:nudge 1.4s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(-8px)}}
+.list{list-style:none;padding:0;margin:8px 0}
+.list li{padding:9px 14px;margin:7px 0;background:var(--card);border:1px solid var(--line);border-radius:16px;animation:up .6s both}
+.list li::before{content:"✓";color:var(--ok);font-weight:700;margin-left:8px}
+button{font:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.btn{padding:10px 16px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);transition:transform .15s,background .3s,border-color .3s}
+.btn:active{transform:scale(.95)}
+.btn.on{background:var(--soft);border-color:var(--main);color:var(--main);font-weight:700}
+.btn.warn{border-color:var(--bad);color:var(--bad)}
+.row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+.msg{text-align:center;font-weight:700;min-height:1.7em;margin:6px 0}
+.note{background:var(--soft);border-radius:14px;padding:10px 12px;font-size:.93rem;margin-top:10px;animation:up .4s both}
+/* ring */
+.ring{position:relative;width:140px;height:140px;margin:6px auto}
+.ring svg{transform:rotate(-90deg);overflow:visible}
+.ring circle{fill:none;stroke-width:9;stroke-linecap:round}
+.ring .bg{stroke:var(--soft)}
+.ring .fg{stroke:url(#g1);stroke-dasharray:276.5;stroke-dashoffset:276.5;transition:stroke-dashoffset .9s cubic-bezier(.3,.9,.3,1);filter:drop-shadow(0 0 5px rgba(184,137,59,.55))}
+.ring.over .fg{stroke:url(#g2)}
+.ring b{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:1.9rem;line-height:1.1}
+.ring b em{font-style:normal}.ring b span{font-size:.75rem;font-weight:400;color:var(--mute)}
+.ring.pulse{animation:pulse .9s 2}
+@keyframes pulse{50%{transform:scale(1.1)}}
+/* options */
+.opt{position:relative;overflow:hidden;display:flex;align-items:center;gap:10px;text-align:right;width:100%;padding:12px 14px;margin:8px 0;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:18px;transition:.3s}
+.opt span{flex:1;font-size:.93rem}.opt small{color:var(--gold);font-weight:700}
+.ck{flex:none;width:24px;height:24px;border-radius:50%;border:2px solid var(--line);position:relative;transition:.3s}
+.ck::after{content:"";position:absolute;left:7px;top:2px;width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) scale(0);transition:transform .3s .1s cubic-bezier(.3,1.6,.5,1)}
+.opt.sel{border-color:var(--main);background:var(--soft);animation:pop .4s}
+.opt.sel .ck{background:var(--main);border-color:var(--main)}.opt.sel .ck::after{transform:rotate(45deg) scale(1)}
+@keyframes pop{40%{transform:scale(1.035)}}
+/* flip tiles */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.tile{height:128px;perspective:600px;border:0;background:none;padding:0}
+.tile div{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.tile.f div{transform:rotateY(180deg)}
+.tile span{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;border:1.5px solid var(--line);background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;text-align:center;font-size:.88rem}
+.tile span:first-child b{font-size:2rem;line-height:1.3}
+.tile span:last-child{transform:rotateY(180deg);background:var(--soft);border-color:var(--main);color:var(--ink)}
+/* water */
+.wrap-w{display:flex;gap:18px;align-items:center;justify-content:center;margin:8px 0}
+.bottle{position:relative;width:96px;height:190px;border:3px solid var(--line);border-radius:26px 26px 30px 30px;overflow:hidden;background:var(--card)}
+.bottle::before{content:"";position:absolute;top:-3px;left:30px;width:30px;height:12px;background:var(--line);border-radius:0 0 8px 8px;z-index:2}
+.wl{position:absolute;left:0;right:0;bottom:0;height:0;background:linear-gradient(var(--water),#2f7fb0);transition:height 1s cubic-bezier(.3,.9,.3,1)}
+.wl::before{content:"";position:absolute;top:-10px;left:-50%;width:200%;height:20px;border-radius:40%;background:var(--water);opacity:.8;animation:wave 3s linear infinite}
+@keyframes wave{to{transform:translateX(25%)}}
+.gl{display:grid;grid-template-columns:repeat(4,46px);gap:8px}
+.gl button{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--line);background:var(--card);font-size:1.3rem;transition:.3s;filter:grayscale(1);opacity:.55}
+.gl button.on{filter:none;opacity:1;border-color:var(--water);background:var(--soft);transform:scale(1.08)}
+/* week */
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin:10px 0}
+.day{padding:8px 0;border-radius:14px;border:1.5px solid var(--line);background:var(--card);font-size:.75rem;text-align:center;line-height:1.3;transition:.3s}
+.day b{display:block;font-size:1.3rem;font-weight:400}
+.day.on{background:var(--main);color:#fff;border-color:var(--main);transform:translateY(-4px);box-shadow:0 8px 14px -8px var(--main)}
+.ex{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--line);font-size:.92rem}.ex:last-child{border:0}.ex b{color:var(--gold)}
+/* chart */
+input[type=range]{width:100%;accent-color:var(--main);margin:8px 0}
+.bar{height:14px;background:var(--soft);border-radius:9px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--main),var(--gold));border-radius:9px;transition:width .5s}
+.chart path.line{fill:none;stroke:var(--main);stroke-width:3;stroke-linecap:round;stroke-dasharray:700;stroke-dashoffset:700;animation:draw 2.6s .4s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.chart text{fill:var(--mute);font-size:10px;font-family:Cairo;text-anchor:middle}
+/* reveal */
+.rv{width:100%;text-align:right;padding:14px 16px;margin:8px 0;border-radius:18px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);transition:.3s}
+.rv b{display:block}.rv span{display:block;max-height:0;opacity:0;overflow:hidden;transition:max-height .5s,opacity .5s,margin .3s;color:var(--main)}
+.rv.o{background:var(--soft);border-color:var(--main)}.rv.o span{max-height:90px;opacity:1;margin-top:6px}
+/* quiz */
+.q b{display:block;margin-bottom:6px}
+.q .opt.good{border-color:var(--ok);background:rgba(47,125,91,.14)}.q .opt.bad{border-color:var(--bad);animation:shake .4s}
+@keyframes shake{25%{transform:translateX(7px)}75%{transform:translateX(-7px)}}
+/* nav */
+footer{position:fixed;bottom:0;left:0;right:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);z-index:9}
+footer div{max-width:560px;margin:auto;display:flex;gap:10px}
+.nx{flex:1;padding:13px;border:0;border-radius:16px;background:linear-gradient(135deg,var(--main),#a8456d);color:#fff;font-weight:700;box-shadow:0 10px 20px -12px var(--main);transition:transform .15s}
+.nx:active{transform:scale(.97)}.nx.pls{animation:pls 1.8s infinite}
+@keyframes pls{50%{box-shadow:0 0 0 8px rgba(184,137,59,.25)}}
+.bk{padding:13px 18px;border-radius:16px;border:1.5px solid var(--line);background:var(--card);color:var(--mute)}
+.conf{position:fixed;left:50%;top:42%;width:10px;height:14px;border-radius:2px;z-index:50;pointer-events:none;animation:burst 1.9s cubic-bezier(.1,.7,.4,1) forwards}
+@keyframes burst{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
+a.nx{display:block;text-align:center;text-decoration:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.slide>*,.list li{opacity:1}}
+</style>
+</head>
+<body>
+<div class="petals" id="petals"></div>
+<header><div class="brand"><span>دليل لولا</span><small id="cnt"></small></div><div id="dots"></div></header>
+<main><div id="view"></div></main>
+<footer><div><button class="bk" id="bk">رجوع</button><button class="nx pls" id="nx">يلا نبدأ</button></div></footer>
+<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7b2d4e"/><stop offset="1" stop-color="#d4a85a"/></linearGradient><linearGradient id="g2"><stop offset="0" stop-color="#b3392f"/><stop offset="1" stop-color="#e0735f"/></linearGradient></defs></svg>
+
+<script>
+var PLAN_URL="revewish.github.io/Lola/lolaa.html"; // لينك موقع الخطة
+var $=function(i){return document.getElementById(i)};
+var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches;
+function countTo(el,to,dec,from){
+ from=from===undefined?parseFloat(el.dataset.v||0):from;el.dataset.v=to;
+ if(reduce){el.textContent=dec?to.toFixed(dec):Math.round(to);return}
+ var t0=performance.now();(function f(n){var p=Math.min((n-t0)/1000,1),e=1-Math.pow(1-p,3),v=from+(to-from)*e;
+  el.textContent=dec?v.toFixed(dec):Math.round(v);if(p<1)requestAnimationFrame(f)})(t0);
+}
+var steps=[
+{h:function(){return '<div class="center"><div class="big"><span id="n1">77</span><i>←</i><span class="gold">65</span></div><p class="sub">كيلو، ده هدفك</p></div><h2 class="center">أهلًا يا لولا</h2><p class="center">الدليل ده هيعلمك تستخدمي موقع خطتك خطوة خطوة، وتفهمي كل حاجة فيه. هياخد 5 دقايق، وكل حاجة هتجربيها بنفسك.</p><ul class="list"><li>إزاي تختاري وجباتك</li><li>يعني إيه دايرة السعرات</li><li>الكميات والمياه والحركة</li><li>إزاي تتابعي وزنك</li></ul>'},
+ i:function(){var e=$("n1");e.dataset.v=77;setTimeout(function(){countTo(e,65,0,77)},700);stag()}},
+{h:function(){return '<h2>1. دايرة السعرات</h2><p>الدايرة في الموقع بتتملي مع كل وجبة تختاريها. عايزاها تقف بين <b>1400 و 1500</b> سعر. جربي دلوقتي: دوسي على الوجبات.</p><div class="ring" id="rg"><svg width="140" height="140" viewBox="0 0 104 104"><circle class="bg" cx="52" cy="52" r="44"/><circle class="fg" id="fg" cx="52" cy="52" r="44"/></svg><b><em id="tt">0</em><span>سعر</span></b></div><div class="msg" id="m2"></div><div class="row" id="mb"></div><div class="row"><button class="btn warn" id="oil">+ ملعقة أكل زيت (135)</button><button class="btn" id="rs">من الأول</button></div><div class="note">بعد ما تكمّلي الأربع وجبات جربي زر الزيت، وشوفي إزاي ملعقة واحدة بتبوظ الحسبة.</div>'},
+ i:function(){
+  var M=[["الفطار",370],["الغدا",590],["السناك",150],["العشا",360]],on={},oil=0,tot=0;
+  var mb=$("mb");
+  function up(){tot=oil;M.forEach(function(m,i){if(on[i])tot+=m[1]});
+   countTo($("tt"),tot);$("fg").style.strokeDashoffset=276.5*(1-Math.min(tot/1500,1));
+   $("rg").classList.toggle("over",tot>1500);
+   var n=Object.keys(on).length,m=$("m2"),ok=n===4&&tot>=1400&&tot<=1500;
+   m.textContent=tot>1500?"زيادة "+(tot-1500)+" سعر. غيري حاجة أخف":ok?"مظبوط على الخطة ✓":n<4?"لسه ناقص، كملي الوجبات":"قريبة";
+   m.style.color=tot>1500?"var(--bad)":ok?"var(--ok)":"";
+   if(ok){var r=$("rg");r.classList.remove("pulse");void r.offsetWidth;r.classList.add("pulse")}}
+  M.forEach(function(m,i){var b=document.createElement("button");b.className="btn";b.textContent=m[0]+" "+m[1];
+   b.onclick=function(){on[i]=!on[i];if(!on[i])delete on[i];b.classList.toggle("on",!!on[i]);up()};mb.appendChild(b)});
+  $("oil").onclick=function(){oil+=135;up()};
+  $("rs").onclick=function(){on={};oil=0;[].forEach.call(mb.children,function(b){b.classList.remove("on")});up()};
+  up();stag()}},
+{h:function(){return '<h2>2. اختيار الوجبات</h2><p>الموقع بيسألك على 4 وجبات ورا بعض: فطار، غدا، سناك، عشا. في كل وجبة هتلاقي اختيارات كتير، اختاري <b>واحد بس</b>. أي واحد ماشي على الخطة لأن سعراتهم قريبة من بعض. جربي:</p><div id="o3"></div><div class="note" id="n3" hidden>برافو. بمجرد ما تختاري، الموقع بيحسبها في الدايرة وينقلك للوجبة اللي بعدها لوحده. وتقدري ترجعي لأي وجبة من الأزرار اللي فوق.</div>'},
+ i:function(){var O=[["بيضتين مسلوقتين + رغيف بلدي صغير + خيار وطماطم + ملعقة قريش",370],["شوفان بلبن (50 جم) + موزة + ملعقة لوز مجروش",370],["أومليت بيضتين بالخضار + توستتين + طماطم",370]],box=$("o3");
+  O.forEach(function(o){var b=document.createElement("button");b.className="opt";b.innerHTML='<i class="ck"></i><span>'+o[0]+'</span><small>'+o[1]+' سعر</small>';
+   b.onclick=function(){[].forEach.call(box.children,function(x){x.classList.remove("sel")});b.classList.add("sel");$("n3").hidden=false};box.appendChild(b)});stag()}},
+{h:function(){return '<h2>3. الكميات</h2><p>الأرقام صح بس لو الكمية صح. دوسي على كل كارت وشوفي المقصود.</p><div class="tiles" id="tl"></div><div class="note">ملعقة أكل زيت لوحدها = 135 سعر. القلي ممنوع قد ما تقدري: الشوي والسلق والفرن.</div>'},
+ i:function(){var T=[["✋","كف الفراخ","حوالي 100 جم مطبوخ، بحجم كف إيدك وسمكها"],["🥛","الكوباية","كوباية عادية مليانة. رز مطبوخ أو قريش أو زبادي: حوالي 150 جم"],["🥄","ملعقة الزيت","ملعقة شاي صغيرة بس. ملعقة الأكل 3 أضعافها"],["🍯","العسل والطحينة","ملعقة أكل مستوية، مش مكوّمة"],["🍞","الرغيف الصغير","بحجم كف إيدك (60 جم). ونص رغيف = نص البلدي العادي"],["🥔","البطاطس المتوسطة","بحجم قبضة إيدك، حوالي 150 جم"]];
+  T.forEach(function(t){var b=document.createElement("button");b.className="tile";b.innerHTML='<div><span><b>'+t[0]+'</b>'+t[1]+'</span><span>'+t[2]+'</span></div>';b.onclick=function(){b.classList.toggle("f")};$("tl").appendChild(b)});stag()}},
+{h:function(){return '<h2>4. المياه</h2><p>حوالي <b>2 لتر</b> شرب في اليوم، يعني 8 كاسات (كل كاسة 250 مل). زيدي في الحر أو لما تمشي كتير. دوسي على الكاسات وشوفي الازازة.</p><div class="wrap-w"><div class="bottle"><div class="wl" id="wl"></div></div><div class="gl" id="gl"></div></div><div class="msg" id="mw">0 / 8 كاسات</div>'},
+ i:function(){var n=0,g=$("gl");for(var k=0;k<8;k++)(function(k){var b=document.createElement("button");b.textContent="💧";b.setAttribute("aria-label","كاسة "+(k+1));
+  b.onclick=function(){n=(n===k+1)?k:k+1;[].forEach.call(g.children,function(x,j){x.classList.toggle("on",j<n)});$("wl").style.height=(n/8*100)+"%";
+   $("mw").textContent=n+" / 8 كاسات"+(n===8?" . يوم مياه كامل 🎉":"")};g.appendChild(b)})(k);stag()}},
+{h:function(){return '<h2>5. الحركة</h2><p><b>مشي كل يوم:</b> 6 لـ 8 آلاف خطوة، وممكن تقسميهم (10 دقايق بعد كل وجبة). <b>وتمرين يومين بس</b> في الأسبوع. اختاري يومين:</p><div class="week" id="wk"></div><div class="msg" id="mk"></div><div class="card"><div class="ex"><span>سكوات على كرسي</span><b>12 مرة</b></div><div class="ex"><span>ضغط على الحيطة</span><b>10 مرات</b></div><div class="ex"><span>رفع الحوض وانتي نايمة</span><b>15 مرة</b></div><div class="ex"><span>سحب بزجاجتين مياه</span><b>12 مرة</b></div><div class="ex"><span>بلانك على الركبة</span><b>20 ثانية</b></div><p class="sub" style="margin:8px 0 0;font-size:.88rem">3 جولات من كل تمرين، وراحة دقيقة بينهم. لو حاجة وجعتك أو دوختي، وقفي.</p></div>'},
+ i:function(){var D=["سبت","أحد","اتنين","تلات","أربع","خميس","جمعة"],sel=[],w=$("wk");
+  function up(){[].forEach.call(w.children,function(x,i){x.classList.toggle("on",sel.indexOf(i)>-1);x.firstChild.textContent=sel.indexOf(i)>-1?"🏋️":"🚶"});
+   var m=$("mk");m.style.color="";
+   if(sel.length<2)m.textContent=sel.length?"فاضل يوم":"اختاري يومين للتمرين";
+   else if(Math.abs(sel[0]-sel[1])===1)m.textContent="تمام، بس الأحسن يبقى بينهم يوم راحة";
+   else{m.textContent="مظبوط. يومين بينهم راحة 👌";m.style.color="var(--ok)"}}
+  D.forEach(function(d,i){var b=document.createElement("button");b.className="day";b.innerHTML="<b>🚶</b>"+d;
+   b.onclick=function(){var p=sel.indexOf(i);if(p>-1)sel.splice(p,1);else{if(sel.length===2)sel.shift();sel.push(i)}sel.sort();up()};w.appendChild(b)});up();stag()}},
+{h:function(){return '<h2>6. وزنك</h2><p>اتوزني <b>مرة في الأسبوع</b>، نفس اليوم والصبح قبل الأكل. سجّلي الرقم في تاب "وزني". حركي المؤشر وشوفي الشريط:</p><div class="card"><input type="range" id="sl" min="65" max="77" step="0.5" value="77" aria-label="وزنك"><div class="bar"><i id="pb"></i></div><div class="msg" id="mz"></div></div><p>ده المتوقع تقريبًا لو التزمتي:</p><div class="card"><svg class="chart" viewBox="0 0 320 170" id="ch" width="100%"></svg></div><div class="note">النزول مش خط مستقيم. هتلاقي أسابيع الوزن واقف فيها وده عادي، المهم الاتجاه العام.</div>'},
+ i:function(){var sl=$("sl");function up(){var v=parseFloat(sl.value);$("pb").style.width=((77-v)/12*100)+"%";$("mz").textContent=v===77?"بداية: 77 كجم":"نزلتي "+(77-v).toFixed(1)+" كجم، فاضل "+(v-65).toFixed(1)+" كجم"}
+  sl.oninput=up;setTimeout(up,50);
+  var w=77,pts=[],x,y,w26=0,w65=-1;
+  for(var k=0;k<=36;k++){x=20+k*(285/36);y=12+(78-w)/14*128;pts.push([x,y]);if(k===26)w26=w;if(w65<0&&w<=65)w65=k;w-=((10*w+6.25*155-5*40-161)*1.41-1450)*7/7700}
+  var d="M"+pts.map(function(p){return p[0].toFixed(1)+","+p[1].toFixed(1)}).join(" L"),yt=12+(78-65)/14*128;
+  var p26=pts[26];
+  $("ch").innerHTML='<line x1="20" x2="305" y1="'+yt+'" y2="'+yt+'" stroke="var(--gold)" stroke-dasharray="4 4"/><text x="22" y="'+(yt-5)+'">الهدف 65</text><path class="line" d="'+d+'"/><circle cx="'+p26[0]+'" cy="'+p26[1]+'" r="5" fill="var(--gold)"/><text x="'+(p26[0]-96)+'" y="'+(p26[1]-10)+'">بعد 6 شهور ≈ '+Math.round(w26)+'</text><text x="160" y="164">الزمن ←</text><text x="12" y="22">77</text>'+(w65>0?'<text x="'+(pts[w65][0]-48)+'" y="'+(yt+16)+'">65 بعد ≈ '+Math.round(w65/4.35)+' شهور</text>':'');stag()}},
+{h:function(){return '<h2>7. أسئلة متوقعة</h2><p>دوسي على السؤال تشوفي الإجابة:</p><button class="rv"><b>الوزن وقف 3 أسابيع؟</b><span>ده طبيعي. قللي 100 لـ 150 سعر أو زودي المشي. متجوعيش نفسك.</span></button><button class="rv"><b>عايزة آكل حاجة من بره الخطة؟</b><span>وجبة حرة واحدة في الأسبوع، وجبة بس مش يوم كامل.</span></button><button class="rv"><b>حسيت بدوخة أو تعب شديد؟</b><span>وقفي التمرين وكلي وارتاحي. ولو استمر كلمي دكتور.</span></button><button class="rv"><b>عندي مرض أو باخد علاج؟</b><span>اسألي دكتور قبل ما تبدأي الخطة.</span></button>'},
+ i:function(){[].forEach.call(document.querySelectorAll(".rv"),function(b){b.onclick=function(){b.classList.toggle("o")}});stag()}},
+{h:function(){return '<h2>8. اختبري نفسك</h2><div id="qz"></div><div class="msg" id="sc"></div>'},
+ i:function(){var Q=[["ملعقة الزيت في الخطة هي:",["ملعقة شاي صغيرة","ملعقة أكل كبيرة"],0],["هدف سعرات اليوم:",["900 سعر","1400 لـ 1500 سعر","2000 سعر"],1],["الوزن وقف 3 أسابيع، أعمل إيه؟",["أقلل 100 لـ 150 سعر أو أزود المشي","أجوّع نفسي يومين","أبطل الخطة"],0]],done=0,right=0;
+  Q.forEach(function(q){var c=document.createElement("div");c.className="card q";c.innerHTML="<b>"+q[0]+"</b>";var dn=false;
+   q[1].forEach(function(o,i){var b=document.createElement("button");b.className="opt";b.innerHTML="<span>"+o+"</span>";
+    b.onclick=function(){if(dn)return;if(i===q[2]){dn=true;b.classList.add("good");right++;done++;chk()}else b.classList.add("bad")};c.appendChild(b)});$("qz").appendChild(c)});
+  function chk(){if(done<3)return;$("sc").textContent="ممتاز يا لولا، جاهزة 🎉";$("sc").style.color="var(--ok)";fin()}stag()}}
+];
+function stag(){[].forEach.call($("view").firstChild.children,function(c,i){c.style.animationDelay=(i*70)+"ms"});
+ [].forEach.call($("view").querySelectorAll(".list li"),function(c,i){c.style.animationDelay=(.4+i*.12)+"s"})}
+function fin(){if(reduce)return;var cols=["#d4a85a","#7b2d4e","#e8a0bd","#2f7d5b","#fff2cf"];
+ for(var i=0;i<46;i++){var e=document.createElement("i");e.className="conf";var a=Math.random()*6.283,d=120+Math.random()*190;
+  e.style.setProperty("--dx",Math.cos(a)*d+"px");e.style.setProperty("--dy",(Math.sin(a)*d+140)+"px");e.style.setProperty("--r",(Math.random()*900-450)+"deg");
+  e.style.background=cols[i%5];document.body.appendChild(e);setTimeout(function(x){x.remove()},2200,e)}}
+var cur=0;
+function show(n,dir){cur=n;var v=$("view");v.innerHTML='<div class="slide '+dir+'">'+steps[n].h()+'</div>';
+ var d=$("dots");d.innerHTML="";steps.forEach(function(s,i){var x=document.createElement("i");x.className=i<n?"done":i===n?"on":"";d.appendChild(x)});
+ $("cnt").textContent=(n+1)+" / "+steps.length;
+ $("bk").style.display=n?"":"none";
+ var nx=$("nx");
+ if(n===steps.length-1){nx.outerHTML='<a class="nx pls" id="nx" href="'+PLAN_URL+'">افتحي خطتك</a>'}
+ else if($("nx").tagName==="A"){$("nx").outerHTML='<button class="nx" id="nx"></button>';bind()}
+ if($("nx").tagName==="BUTTON")$("nx").textContent=n?"التالي":"يلا نبدأ";
+ steps[n].i();window.scrollTo(0,0);try{localStorage.setItem("lola_guide",n)}catch(e){}}
+function bind(){$("nx").onclick=function(){if(cur<steps.length-1)show(cur+1,"next")}}
+$("bk").onclick=function(){if(cur>0)show(cur-1,"prev")};bind();
+var s0=0;try{s0=parseInt(localStorage.getItem("lola_guide"))||0}catch(e){}
+show(Math.min(s0,steps.length-1),"next");
+if(!reduce)for(var i=0;i<12;i++){var p=document.createElement("i");p.className="petal";var s=10+Math.random()*14;
+ p.style.cssText="left:"+Math.random()*100+"vw;width:"+s+"px;height:"+s+"px;animation-duration:"+(14+Math.random()*14)+"s;animation-delay:-"+Math.random()*20+"s";$("petals").appendChild(p)}
+</script>
+</body>
+</html>

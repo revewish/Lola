@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#000000">
+<title>لولا | فيلم قصير</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#d9b068;--cream:#f3e6d3;--rose:#e8a0bd}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;background:#050308;color:var(--cream);overflow:hidden;font-family:Cairo,"Segoe UI",Tahoma,sans-serif}
+#film{position:fixed;inset:0;overflow:hidden;background:radial-gradient(120% 90% at 50% 40%,#2c1022,#0a0509 72%)}
+.leak{position:absolute;width:62vmax;height:62vmax;border-radius:50%;filter:blur(90px);opacity:.26;mix-blend-mode:screen;animation:leak 18s ease-in-out infinite alternate}
+.l1{background:#b8893b;top:-32vmax;right:-22vmax}.l2{background:#7b2d4e;bottom:-32vmax;left:-22vmax;animation-delay:-9s}
+@keyframes leak{to{transform:translate(9vmax,7vmax) scale(1.25);opacity:.42}}
+.dust{position:absolute;inset:0;pointer-events:none}
+.dust i{position:absolute;bottom:-10px;border-radius:50%;background:var(--gold);opacity:0;animation:dust linear infinite}
+@keyframes dust{10%{opacity:.5}90%{opacity:.4}100%{transform:translateY(-110vh) translateX(30px);opacity:0}}
+.grain{position:absolute;inset:-50%;opacity:.13;pointer-events:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");animation:gr .7s steps(6) infinite}
+@keyframes gr{0%{transform:translate(0,0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-4%)}60%{transform:translate(-3%,-2%)}80%{transform:translate(4%,4%)}100%{transform:translate(0,0)}}
+.vig{position:absolute;inset:0;box-shadow:inset 0 0 20vmax rgba(0,0,0,.9);pointer-events:none;z-index:4}
+.bar{position:absolute;left:0;right:0;height:11vh;background:#000;z-index:5}.bt{top:0}.bb{bottom:0}
+#prog{position:absolute;left:0;bottom:11vh;height:2px;width:0;background:linear-gradient(90deg,transparent,var(--gold));z-index:6}
+#stage{position:absolute;top:11vh;bottom:11vh;left:0;right:0}
+.sc{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 7vw;animation:scIn 1.2s both}
+.sc.out{animation:scOut .9s forwards}
+@keyframes scIn{from{opacity:0}to{opacity:1}}
+@keyframes scOut{to{opacity:0;filter:blur(8px)}}
+.z{display:flex;flex-direction:column;align-items:center;gap:2.4vh;animation:kb 12s linear both}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.09)}}
+.t{opacity:0;font-size:clamp(1.4rem,6vw,2.3rem);line-height:1.7;font-weight:600;animation:rev 1.5s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes rev{from{opacity:0;filter:blur(14px);transform:translateY(14px) scale(1.08)}to{opacity:1;filter:none;transform:none}}
+.sm{font-size:clamp(.95rem,3.6vw,1.2rem);color:var(--gold);font-weight:400}
+.big{font-family:Amiri,serif;font-size:clamp(3.6rem,19vw,7.5rem);line-height:1.15;font-weight:700;background:linear-gradient(110deg,#b8893b 25%,#fff3c8 50%,#b8893b 75%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:rev 1.6s cubic-bezier(.2,.8,.2,1) forwards,shine 4s linear infinite}
+.mid{font-family:Amiri,serif;font-size:clamp(2.4rem,11vw,4.4rem);line-height:1.3;color:var(--gold)}
+@keyframes shine{to{background-position:-250% 0}}
+.gl{color:var(--rose)}
+.ic{opacity:0;animation:rev 1.4s forwards}
+.draw{stroke-dasharray:130;stroke-dashoffset:130;animation:dr 1s ease-out forwards}
+@keyframes dr{to{stroke-dashoffset:0}}
+.fade{animation:fo 1.2s forwards}
+@keyframes fo{to{opacity:.25;filter:grayscale(1)}}
+.rf{stroke-dasharray:276.5;stroke-dashoffset:276.5;animation:rf 3.2s cubic-bezier(.3,.9,.3,1) forwards;filter:drop-shadow(0 0 8px rgba(217,176,104,.7))}
+@keyframes rf{to{stroke-dashoffset:5.5}}
+.rg{position:relative;width:min(52vw,210px);height:min(52vw,210px)}
+.rg svg{width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
+.rg circle{fill:none;stroke-width:5;stroke-linecap:round}
+.rg b{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Amiri,serif;font-size:clamp(2rem,10vw,3.4rem);line-height:1.1;font-weight:700;color:var(--gold)}
+.rg b span{font-family:Cairo;font-size:.8rem;font-weight:400;color:var(--cream);opacity:.7}
+.ico{display:flex;gap:6vw;justify-content:center}
+.ico div{opacity:0;transform:translateY(46px);font-size:clamp(2.4rem,11vw,3.6rem);animation:ri 1.2s cubic-bezier(.2,.8,.2,1) forwards;display:flex;flex-direction:column;align-items:center}
+.ico small{font-size:.8rem;color:var(--gold);margin-top:6px;font-family:Cairo}
+@keyframes ri{to{opacity:1;transform:none}}
+.line{width:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:ln 2s forwards}
+@keyframes ln{to{width:min(60vw,320px)}}
+.roll{position:absolute;left:0;right:0;top:100%;display:flex;flex-direction:column;align-items:center;gap:7vh;animation:roll 13s linear forwards}
+@keyframes roll{to{transform:translateY(-190%)}}
+.roll small{display:block;font-size:.9rem;color:var(--gold);font-weight:400}
+.roll div{font-family:Amiri,serif;font-size:clamp(2rem,9vw,3.2rem);line-height:1.4}
+.fin a{display:inline-block;padding:12px 26px;border-radius:40px;text-decoration:none;font-weight:700;color:#1b0b14;background:linear-gradient(135deg,#e9c987,#b8893b);box-shadow:0 0 30px rgba(217,176,104,.4)}
+.fin a.g{background:none;color:var(--gold);box-shadow:none;border:1px solid rgba(217,176,104,.5);font-weight:600;padding:9px 20px;font-size:.9rem}
+.fin .row{display:flex;flex-direction:column;gap:12px;align-items:center;opacity:0;animation:rev 1.4s forwards}
+a:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.grain,.dust,.leak,.z{animation:none}.t,.big{animation-duration:.01s}}
+</style>
+</head>
+<body>
+<div id="film">
+ <div class="leak l1"></div><div class="leak l2"></div><div class="dust" id="dust"></div>
+ <div id="stage"></div>
+ <div class="grain"></div><div class="vig"></div><div class="bar bt"></div><div class="bar bb"></div><div id="prog"></div>
+</div>
+<script>
+var PLAN_URL="revewish.github.io/Lola/lolaa.html",GUIDE_URL="revewish.github.io/Lola/guide.html";
+var $=function(i){return document.getElementById(i)};
+function countTo(el,from,to,ms,dec){el.textContent=dec?from.toFixed(dec):from;var t0=performance.now();
+ (function f(n){var p=Math.min((n-t0)/ms,1),e=1-Math.pow(1-p,3),v=from+(to-from)*e;el.textContent=dec?v.toFixed(dec):Math.round(v);if(p<1)requestAnimationFrame(f)})(t0)}
+var IMG='<svg class="ic" data-d="300" width="120" height="100" viewBox="0 0 120 100" fill="none" stroke="#d9b068" stroke-width="3" stroke-linejoin="round"><rect x="8" y="8" width="104" height="84" rx="8"/><circle cx="38" cy="35" r="9"/><path d="M8 78 L45 48 L70 68 L88 54 L112 74"/><line class="draw" data-d="2600" x1="14" y1="92" x2="108" y2="10" stroke="#e8a0bd" stroke-width="4"/></svg>';
+var PDF='<svg class="ic" data-d="300" width="100" height="120" viewBox="0 0 100 120" fill="none" stroke="#d9b068" stroke-width="3" stroke-linejoin="round"><path d="M12 6h50l26 26v82H12z"/><path d="M62 6v26h26"/><text x="50" y="82" text-anchor="middle" fill="#d9b068" stroke="none" font-size="22" font-weight="700" font-family="Cairo">PDF</text><line class="draw" data-d="2600" x1="8" y1="112" x2="94" y2="10" stroke="#e8a0bd" stroke-width="4"/></svg>';
+var S=[
+{d:3600,h:'<div class="t sm" data-d="300">ريفي</div><div class="t sm" data-d="1300">يقدّم</div>'},
+{d:7000,h:'<div class="t sm" data-d="300">فيلم قصير</div><div class="big" data-d="1100">لولا</div><div class="line" style="animation-delay:2s"></div><div class="t" data-d="2600">خطة اتعملت مخصوص ليكي</div>'},
+{d:5600,h:IMG+'<div class="t" data-d="900">كان ممكن أبعتلك صورة…</div>'},
+{d:5600,h:PDF+'<div class="t" data-d="900">أو ملف PDF…</div>'},
+{d:6200,h:'<div class="t" data-d="400">وأخلّص.</div><div class="t" data-d="1900">بس ده مش هيناسبك،</div><div class="t" data-d="3100">ولا هيناسب احتياجك.</div>'},
+{d:7200,h:'<div class="t sm" data-d="300">فقلت لنفسي</div><div class="t" data-d="1200">لو هعمل حاجة،</div><div class="mid t" data-d="2600">أعملها صح.</div><div class="t" data-d="4200">احترافي، ومقاسه عليكي انتي.</div>'},
+{d:5200,h:'<div class="t sm" data-d="300">وكده اتولد</div><div class="mid t" data-d="1200">موقعك الخاص</div>'},
+{d:8000,h:'<div class="rg"><svg viewBox="0 0 104 104"><circle cx="52" cy="52" r="44" stroke="rgba(243,230,211,.12)"/><circle class="rf" data-d="600" cx="52" cy="52" r="44" stroke="#d9b068"/></svg><b><em id="rn" style="font-style:normal">0</em><span>سعر</span></b></div><div class="t" data-d="1500">دايرة بتحسبلك يومك</div><div class="t sm" data-d="3200">وجبات كتير تختاري منها، وكل اختيار ماشي على الخطة</div>',i:function(){setTimeout(function(){countTo($("rn"),0,1470,3000)},900)}},
+{d:7000,h:'<div class="ico"><div style="animation-delay:.4s">💧<small>مياه</small></div><div style="animation-delay:1s">🚶<small>مشي</small></div><div style="animation-delay:1.6s">🏋️<small>تمرين</small></div><div style="animation-delay:2.2s">⚖️<small>وزنك</small></div></div><div class="t" data-d="3000">ومياه، ومشي، وتمرين،</div><div class="t" data-d="4000">ومتابعة لوزنك أسبوع بأسبوع</div>'},
+{d:5600,h:'<div class="t sm" data-d="300">ولإني عارف إن البداية بتبقى صعبة</div><div class="mid t" data-d="1600">عملتلك دليل</div><div class="t" data-d="3000">بيمسك إيدك خطوة بخطوة</div>'},
+{d:8000,h:'<div class="t sm" data-d="300">ومن غير وعود وهمية</div><div class="big" style="font-size:clamp(3rem,16vw,6rem)" data-d="1100"><span id="wn">77</span></div><div class="t" data-d="2600">نص كيلو في الأسبوع تقريبًا</div><div class="t sm" data-d="4000">بالراحة، وبثبات، لحد 65</div>',i:function(){setTimeout(function(){countTo($("wn"),77,65,4200)},1500)}},
+{d:8200,h:'<div class="t" data-d="400">وكل ده كان مستحيل يتعمل</div><div class="t" data-d="1500">من غير حد ساعدني…</div><div class="big" data-d="3000">جوري</div><div class="t" data-d="4700">ولولا جوري <span class="gl">ما كان ده اتعمل</span></div>'},
+{d:14500,h:'<div class="roll"><div><small>بطولة</small>لولا</div><div><small>مساعدة</small>جوري</div><div><small>فكرة وتنفيذ</small>ريفي</div><div><small>بدون صورة، وبدون PDF</small>بس بحب</div></div>'},
+{last:1,h:'<div class="fin" style="display:flex;flex-direction:column;align-items:center;gap:3vh"><div class="t sm" data-d="300">الخطة جاهزة</div><div class="big" data-d="1000" style="font-size:clamp(2.8rem,14vw,5.5rem)">يلا نبدأ</div><div class="row" style="animation-delay:2.6s"><a href="'+'GUIDE'+'" id="a1">ابدئي بالدليل</a><a class="g" href="'+'PLAN'+'" id="a2">أو افتحي الخطة مباشرة</a><a class="g" href="#" id="rp">شاهدي الفيلم تاني</a></div></div>',
+ i:function(){$("a1").href=GUIDE_URL;$("a2").href=PLAN_URL;$("rp").onclick=function(e){e.preventDefault();start()}}}
+];
+var st=$("stage"),timers=[];
+function play(n){
+ var s=S[n];st.innerHTML='<div class="sc"><div class="z">'+s.h+'</div></div>';var sc=st.firstChild;
+ [].forEach.call(sc.querySelectorAll("[data-d]"),function(e){e.style.animationDelay=e.dataset.d+"ms"});
+ if(s.i)s.i();
+ if(!s.last){timers.push(setTimeout(function(){sc.classList.add("out")},s.d-900));timers.push(setTimeout(function(){play(n+1)},s.d))}
+}
+function start(){
+ timers.forEach(clearTimeout);timers=[];
+ var tot=S.reduce(function(a,s){return a+(s.d||0)},0),p=$("prog");
+ p.style.transition="none";p.style.width="0";void p.offsetWidth;p.style.transition="width "+tot+"ms linear";p.style.width="100%";
+ play(0);
+}
+// dust
+for(var i=0;i<26;i++){var d=document.createElement("i"),s=2+Math.random()*3;
+ d.style.cssText="left:"+Math.random()*100+"%;width:"+s+"px;height:"+s+"px;animation-duration:"+(10+Math.random()*14)+"s;animation-delay:-"+Math.random()*20+"s";$("dust").appendChild(d)}
+start();
+</script>
+</body>
+</html>
