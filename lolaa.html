@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#7b2d4e">
+<title>خطة لولا</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf6f0;--card:#fffdfa;--ink:#33222a;--mute:#86747a;--main:#7b2d4e;--gold:#b8893b;--soft:#f5e6ea;--ok:#2f7d5b;--bad:#b3392f;--line:#ecdcd2}
+@media (prefers-color-scheme:dark){:root{--bg:#1c1316;--card:#271b1f;--ink:#f6ebe8;--mute:#b9a5a9;--main:#e8a0bd;--gold:#e0b565;--soft:#3a2530;--ok:#6fcba0;--bad:#f08a80;--line:#42303a}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:var(--bg);overflow-x:hidden}
+body{margin:0;color:var(--ink);font-family:Cairo,"Segoe UI",Tahoma,sans-serif;line-height:1.7;padding-bottom:92px;overflow-x:hidden;min-height:100vh;
+ background:radial-gradient(60% 40% at 15% 0%,var(--soft),transparent 70%),radial-gradient(50% 35% at 100% 100%,rgba(184,137,59,.16),transparent 70%),var(--bg);background-attachment:fixed}
+/* splash */
+#splash{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 40%,#9a3a63,#4a1630 70%);color:#fff;transition:opacity .8s,transform .8s,visibility .8s;cursor:pointer}
+#splash.hide{opacity:0;transform:scale(1.15);visibility:hidden}
+#splash h1{font-family:Amiri,serif;font-size:6rem;margin:0;line-height:1.1;background:linear-gradient(110deg,#e9c987 20%,#fff6dd 40%,#e9c987 60%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 2.2s linear infinite,zoomin 1.4s cubic-bezier(.2,.9,.2,1) both}
+#splash p{margin:6px 0 0;letter-spacing:1px;opacity:0;animation:fadeup 1s .9s forwards;color:#f3dcc0}
+#splash .ln{width:0;height:2px;background:#e9c987;margin-top:14px;animation:ln 1.3s .5s forwards}
+@keyframes ln{to{width:140px}}
+@keyframes zoomin{from{opacity:0;transform:scale(.6);filter:blur(12px)}to{opacity:1;transform:none;filter:none}}
+@keyframes fadeup{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes shine{to{background-position:-250% 0}}
+/* petals */
+.petals{position:fixed;inset:0;overflow:hidden;z-index:-1;pointer-events:none}
+.petal{position:absolute;top:-30px;border-radius:150% 0 150% 0;background:linear-gradient(135deg,var(--soft),#e8a0bd);opacity:.55;animation:drift linear infinite;pointer-events:none}
+@keyframes drift{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(40px,55vh) rotate(180deg)}100%{transform:translate(-30px,112vh) rotate(380deg)}}
+header{text-align:center;padding:30px 16px 4px}
+header small{display:block;color:var(--gold);font-weight:700;letter-spacing:1px;animation:fadeup .8s 2.4s both}
+header h1{font-family:Amiri,serif;font-size:3.6rem;line-height:1.15;margin:0;background:linear-gradient(110deg,var(--main) 30%,var(--gold) 50%,var(--main) 70%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 5s linear infinite,fadeup .9s 2.5s both}
+header p{margin:0;color:var(--mute);animation:fadeup .8s 2.7s both}
+.wrap{max-width:560px;margin:auto;padding:0 16px}
+section{display:none}section.on{display:block;animation:fadeup .5s both}
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:18px;margin:14px 0;box-shadow:0 14px 34px -20px rgba(123,45,78,.45);overflow:hidden}
+.card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.7}
+h2{margin:0 0 2px;font-size:1.2rem;color:var(--main)}
+.hint{margin:0 0 12px;color:var(--mute);font-size:.92rem}
+/* ring */
+.top{display:flex;align-items:center;gap:16px}
+.ring{position:relative;width:112px;height:112px;flex:none}
+.ring svg{transform:rotate(-90deg);overflow:visible}
+.ring circle{fill:none;stroke-width:9;stroke-linecap:round}
+.ring .bg{stroke:var(--soft)}
+.ring .fg{stroke:url(#g);stroke-dasharray:276.5;stroke-dashoffset:276.5;transition:stroke-dashoffset 1s cubic-bezier(.3,.9,.3,1);filter:drop-shadow(0 0 5px rgba(184,137,59,.55))}
+.ring.over .fg{stroke:url(#gb)}
+.ring.pulse{animation:pulse 1.2s 2}
+.ring b{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:1.5rem;line-height:1.1}
+.ring b span{font-size:.7rem;font-weight:400;color:var(--mute)}
+@keyframes pulse{50%{transform:scale(1.1)}}
+.msg{font-weight:700;font-size:1.02rem}
+.chips{display:flex;gap:6px;margin-top:14px}
+.chip{flex:1;padding:7px 2px;border-radius:13px;font-size:.85rem;background:var(--soft);color:var(--mute);border:0;font-family:inherit;cursor:pointer;transition:background .35s,color .35s,transform .35s}
+.chip.on{background:linear-gradient(135deg,var(--main),#a8456d);color:#fff;font-weight:700;transform:translateY(-2px);box-shadow:0 8px 16px -8px var(--main)}
+.chip.done{color:var(--ok);font-weight:700}
+.chip.done::before{content:"✓ "}
+/* stage */
+#stage{perspective:900px}
+.stg-in{animation:stgin .55s cubic-bezier(.2,.9,.2,1) both}
+.stg-out{animation:stgout .25s ease-in both}
+@keyframes stgin{from{opacity:0;transform:translateX(-50px) rotateY(-12deg)}to{opacity:1;transform:none}}
+@keyframes stgout{to{opacity:0;transform:translateX(50px) rotateY(12deg)}}
+.opts{display:grid;gap:10px}
+.opt{position:relative;overflow:hidden;display:flex;align-items:center;gap:10px;text-align:right;width:100%;padding:13px 14px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:18px;font:inherit;cursor:pointer;transition:transform .2s,border-color .3s,background .3s,box-shadow .3s}
+.opt.in{animation:optin .6s cubic-bezier(.2,.9,.2,1) both}
+@keyframes optin{from{opacity:0;transform:translateY(26px) scale(.94)}to{opacity:1;transform:none}}
+.opt:active{transform:scale(.97)}
+.opt span{flex:1}
+.opt small{color:var(--gold);font-weight:700;white-space:nowrap}
+.ck{flex:none;width:24px;height:24px;border-radius:50%;border:2px solid var(--line);position:relative;transition:.3s}
+.ck::after{content:"";position:absolute;left:7px;top:2px;width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) scale(0);transition:transform .3s .1s cubic-bezier(.3,1.6,.5,1)}
+.opt.sel{border-color:var(--main);background:var(--soft);box-shadow:0 10px 22px -14px var(--main);animation:pop .45s}
+.opt.sel .ck{background:var(--main);border-color:var(--main)}
+.opt.sel .ck::after{transform:rotate(45deg) scale(1)}
+.opt.big{opacity:.5}
+@keyframes pop{40%{transform:scale(1.035)}}
+.rip{position:absolute;border-radius:50%;background:var(--gold);opacity:.35;transform:scale(0);animation:rip .7s ease-out forwards;pointer-events:none}
+@keyframes rip{to{transform:scale(1);opacity:0}}
+.note{background:var(--soft);border-radius:14px;padding:10px 12px;margin-bottom:12px;font-size:.93rem}
+.done-t{font-family:Amiri,serif;font-size:2.1rem;margin:0 0 8px;text-align:center;background:linear-gradient(110deg,var(--main) 30%,var(--gold) 50%,var(--main) 70%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 3s linear infinite}
+.row{display:flex;justify-content:space-between;gap:8px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:.93rem}
+.row:last-child{border:0}.row>b{color:var(--gold);white-space:nowrap}
+.row.rs{opacity:0;animation:fadeup .5s forwards}
+button.go{padding:11px 22px;border:0;background:linear-gradient(135deg,var(--main),#a8456d);color:#fff;border-radius:14px;font:inherit;font-weight:700;cursor:pointer;transition:transform .15s}
+button.go:active{transform:scale(.95)}
+.ghost{width:100%;margin-top:12px;padding:11px;border:1.5px solid var(--line);background:none;color:var(--main);font-weight:600;border-radius:14px;font:inherit;cursor:pointer}
+ul{margin:6px 0;padding-right:20px}li{margin:4px 0}
+input[type=number]{font:inherit;padding:10px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);width:120px;margin-left:8px}
+.bar{height:14px;background:var(--soft);border-radius:9px;overflow:hidden;margin:16px 0 8px}
+.bar i{position:relative;display:block;height:100%;width:0;background:linear-gradient(90deg,var(--main),var(--gold));border-radius:9px;transition:width 1.4s cubic-bezier(.3,.9,.3,1);overflow:hidden}
+.bar i::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(100%);animation:sweep 2.2s infinite}
+@keyframes sweep{to{transform:translateX(-100%)}}
+.bigkg{font-family:Amiri,serif;font-size:2.4rem;color:var(--main);line-height:1}
+/* nav */
+nav{position:fixed;bottom:0;left:0;right:0;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);z-index:9}
+.navin{position:relative;display:flex;max-width:420px;margin:auto;background:var(--soft);border-radius:18px;padding:4px}
+.pill{position:absolute;top:4px;bottom:4px;left:0;width:0;border-radius:14px;background:linear-gradient(135deg,var(--main),#a8456d);box-shadow:0 8px 16px -8px var(--main);transition:transform .45s cubic-bezier(.3,1.3,.5,1),width .45s}
+nav button{position:relative;flex:1;padding:8px 4px;border:0;background:none;color:var(--mute);font:inherit;font-weight:600;cursor:pointer;transition:color .3s}
+nav button.on{color:#fff}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.conf{position:fixed;left:50%;top:42%;width:10px;height:14px;border-radius:2px;z-index:50;pointer-events:none;animation:burst 1.9s cubic-bezier(.1,.7,.4,1) forwards}
+@keyframes burst{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
+details.guide{padding:0}
+details.guide summary{list-style:none;cursor:pointer;padding:16px 18px;font-weight:700;color:var(--main);display:flex;justify-content:space-between;align-items:center}
+details.guide summary::-webkit-details-marker{display:none}
+details.guide summary::after{content:"";width:9px;height:9px;border:solid var(--gold);border-width:0 2.5px 2.5px 0;transform:rotate(45deg);transition:transform .35s;margin-top:-4px}
+details.guide[open] summary::after{transform:rotate(-135deg);margin-top:4px}
+.gbody{padding:0 18px 16px;animation:fadeup .45s both}
+.gbody .row{font-size:.9rem}.gbody .row span:first-child{font-weight:700;color:var(--main);flex:none;max-width:42%}.gbody .row span:last-child{flex:1}
+.gwarn{background:var(--soft);border-radius:14px;padding:10px 12px;margin-top:12px;font-size:.9rem}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}#splash{display:none}.row.rs{opacity:1}header small,header h1,header p{opacity:1}}
+</style>
+</head>
+<body>
+<div id="splash"><h1>لولا</h1><div class="ln"></div><p>خطتك الخاصة</p></div>
+<header><small>أهلًا بيكي</small><h1>لولا</h1><p>خطوة خطوة لحد 65 كيلو</p></header>
+<div class="wrap">
+
+<section id="food" class="on">
+<div class="card">
+ <div class="top">
+  <div class="ring" id="ringbox"><svg width="112" height="112" viewBox="0 0 104 104"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7b2d4e"/><stop offset="1" stop-color="#d4a85a"/></linearGradient><linearGradient id="gb"><stop offset="0" stop-color="#b3392f"/><stop offset="1" stop-color="#e0735f"/></linearGradient></defs><circle class="bg" cx="52" cy="52" r="44"/><circle class="fg" id="fg" cx="52" cy="52" r="44"/></svg><b><em id="tot" style="font-style:normal">0</em><span>سعر</span></b></div>
+  <div><div class="msg" id="msg"></div><div class="hint" style="margin:0">هدف اليوم 1400 لـ 1500</div></div>
+ </div>
+ <div class="chips" id="chips"></div>
+</div>
+<div id="stage"></div>
+<details class="card guide" id="guide"><summary>مسطرة الكميات (مهمة)</summary><div class="gbody"><div class="row"><span>كف الفراخ أو السمك</span><span>بحجم كف إيدك وسمكها، حوالي 100 جم مطبوخ</span></div><div class="row"><span>نص طبق رز</span><span>كوباية عادية مليانة رز مطبوخ (حوالي 150 جم)</span></div><div class="row"><span>طبق مكرونة صغير</span><span>كوباية ونص مكرونة مطبوخة (حوالي 200 جم)</span></div><div class="row"><span>رغيف بلدي صغير</span><span>بحجم كف إيدك تقريبًا (حوالي 60 جم)</span></div><div class="row"><span>نص رغيف</span><span>نص رغيف بلدي عادي (حوالي 45 جم)</span></div><div class="row"><span>بطاطس متوسطة</span><span>بحجم قبضة إيدك (حوالي 150 جم)</span></div><div class="row"><span>كفتة 4 أصابع</span><span>4 صوابع بحجم صباع الإيد (حوالي 100 جم)</span></div><div class="row"><span>كوباية قريش أو زبادي</span><span>كوباية عادية مليانة (حوالي 150 جم)، والكبيرة حوالي 250 جم</span></div><div class="row"><span>ملعقة زيت</span><span>ملعقة شاي صغيرة (5 مل)، مش ملعقة أكل</span></div><div class="row"><span>ملعقة عسل أو طحينة</span><span>ملعقة أكل مستوية، مش مكوّمة</span></div><div class="row"><span>السلطة</span><span>كبيرة براحتك، بس بملعقة زيت صغيرة أو عصير ليمون</span></div><div class="gwarn">السعرات محسوبة على الشوي والسلق والطبخ بزيت قليل (ملعقة صغيرة للوجبة). القلي أو زيادة الزيت والسمن بيزودوا السعرات بسرعة: ملعقة أكل زيت لوحدها حوالي 135 سعر. وميزان المطبخ أدق من التقدير بالعين، لو متاح.</div></div></details>
+</section>
+
+<section id="move">
+<div class="card"><h2>المشي</h2><p class="hint" style="margin:0">6 لـ 8 آلاف خطوة كل يوم. ممكن تقسميهم، 10 دقايق بعد كل وجبة بتفرق. وكل ما مشيتي بسرعة تخليكي تتنفسي أسرع شوية، فايدته أكبر.</p></div>
+<div class="card"><h2>تمرين مرتين في الأسبوع</h2><p class="hint">25 لـ 30 دقيقة، 3 جولات من كل تمرين، وارتاحي دقيقة بين الجولات. مرتين في الأسبوع هو الحد الأدنى اللي بتوصي بيه منظمة الصحة العالمية للعضلات.</p>
+<ul><li>سكوات على كرسي: 12 مرة</li><li>ضغط على الحيطة: 10 مرات</li><li>رفع الحوض وانتي نايمة: 15 مرة</li><li>سحب بأستك أو زجاجتين مياه: 12 مرة</li><li>بلانك على الركبة: 20 ثانية</li></ul></div>
+<div class="card"><h2>افتكري</h2><ul>
+<li>مياه حوالي 2 لتر في اليوم، وزيدي في الحر أو لما تمشي كتير.</li><li>بروتين في كل وجبة (بيض، فراخ، سمك، زبادي، قريش، بقوليات).</li><li>سكر وعصاير ومقليات: أقل ما يمكن.</li>
+<li>وجبة حرة واحدة في الأسبوع، وجبة بس مش يوم كامل.</li>
+<li>لو الوزن وقف 3 أسابيع، قللي 100 لـ 150 سعر أو زودي المشي. متجوعيش نفسك.</li>
+<li>المتوقع نص كيلو في الأسبوع تقريبًا: حوالي 66 لـ 68 بعد 6 شهور، وتوصلي لـ 65 في حوالي 7 لـ 8 شهور. ده نزول سليم وبيثبت. وكل ما التزمتي بالمشي والتمرين، قربتي من الـ 7 شهور.</li>
+<li>لو عندك مرض أو بتاخدي علاج، اسألي دكتور الأول.</li></ul></div>
+</section>
+
+<section id="track">
+<div class="card"><h2>وزني</h2><p class="hint">مرة في الأسبوع، نفس اليوم والصبح قبل الأكل.</p>
+<input type="number" id="w" step="0.1" min="40" max="150" placeholder="كجم"><button class="go" id="save">سجّلي</button>
+<div class="bar"><i id="pb"></i></div><div class="bigkg" id="kg">0</div><div class="hint" id="pt" style="margin:0"></div><div id="hist" style="margin-top:10px"></div></div>
+</section>
+</div>
+
+<nav><div class="navin"><span class="pill" id="pill"></span><button class="on" data-t="food">الأكل</button><button data-t="move">الحركة</button><button data-t="track">وزني</button></div></nav>
+
+<script>
+var TARGET=1450,MIN=1200,MAX=1500;
+var B=[["بيضتين مسلوقتين + رغيف بلدي صغير + خيار وطماطم + ملعقة قريش",370,1],["شوفان بلبن (50 جم) + موزة + ملعقة لوز مجروش",370,0],["فول بملعقة زيت + نص رغيف + بيضة مسلوقة + سلطة",370,1],["زبادي كوباية كبيرة + شوفان 40 جم + تفاحة + ملعقة عسل",360,0],["أومليت بيضتين بالخضار + توستتين + طماطم",370,1],["جبنة قريش نص كوباية + توستتين + خيار + 5 زيتون",360,1],["3 حبات طعمية في الفرن + سلطة + رغيف صغير + ملعقة طحينة",380,0],["بيضة مسلوقة + قريش + توستتين + برتقالة",365,1],["بان كيك شوفان (بيضة + موزة) + ملعقة عسل + زبادي",370,0],["ساندوتش جبنة رومي لايت + بيضة مسلوقة + خيار وطماطم + فاكهة",360,1]];
+var L=[["فراخ مشوية (كف إيدك) + نص طبق رز + خضار سوتيه + سلطة",590],["سمك مشوي + بطاطس مسلوقة متوسطة + سلطة + رغيف صغير",580],["كفتة مشوية 4 أصابع + سلطة + نص رغيف + ملعقة طحينة",590],["مكرونة (طبق صغير) بصلصة طماطم + صدر فراخ",600],["شوربة عدس كبيرة + فراخ مسلوقة + سلطة + رغيف صغير",570],["ملوخية + فراخ مسلوقة + نص طبق رز",580],["بامية بلحمة + نص طبق رز + سلطة",600],["تونة + بطاطس مسلوقة متوسطة + سلطة + رغيف صغير",575],["كبدة مشوية + سلطة + رغيف صغير + نص طبق رز",590],["خضار مشوي بالفرن + فراخ + نص طبق رز",580],["عدس أصفر + سلطة + رغيف صغير + زبادي",570],["شاورما فراخ بيتي + نص رغيف + سلطة + ملعقة طحينة",590]];
+var S=[["زبادي كوباية + نص موزة",150],["تفاحة + 8 حبات لوز",150],["جزرة + 3 معالق حمص",150],["فشار بدون زيت (كوبايتين)",145],["بيضتين مسلوقتين",150],["جبنة قريش كوباية صغيرة + خيار",150],["تمرتين + كوباية شاي بلبن خفيف",150]];
+var D=[["جبنة قريش كوباية + سلطة كبيرة + رغيف صغير",360],["سلطة تونة (علبة كاملة) + خس + نص رغيف",360],["أومليت بيضتين + سلطة + توستة",360],["زبادي + خيار + جرجير + بيضتين مسلوقتين",350],["شوربة خضار + بيضتين + توستة",350],["ساندوتش فراخ مشوية + سلطة",370],["سلطة فراخ مشوية بزبادي + نص رغيف",360],["سمك مشوي + خضار + نص رغيف",370]];
+var K=["b","l","s","d"],NAMES=["الفطار","الغدا","السناك","العشا"],DATA={b:B,l:L,s:S,d:D};
+var TITLES=["اختاري فطارك","اختاري غداك","اختاري سناك","اختاري عشاك"];
+var pick={b:null,l:null,s:null,d:null},step=0,busy=false;
+var $=function(i){return document.getElementById(i)};
+var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches;
+function tot(){var t=0;K.forEach(function(k){if(pick[k]!==null)t+=DATA[k][pick[k]][1]});return t}
+function countTo(el,to,dec){
+ var from=parseFloat(el.dataset.v||0);el.dataset.v=to;
+ if(reduce){el.textContent=dec?to.toFixed(dec):Math.round(to);return}
+ var t0=performance.now();
+ (function f(n){var p=Math.min((n-t0)/800,1),e=1-Math.pow(1-p,3),v=from+(to-from)*e;
+  el.textContent=dec?v.toFixed(dec):Math.round(v);if(p<1)requestAnimationFrame(f)})(t0);
+}
+function ring(){
+ var t=tot();countTo($("tot"),t);
+ $("fg").style.strokeDashoffset=276.5*(1-Math.min(t/MAX,1));
+ $("ringbox").classList.toggle("over",t>MAX);
+ var m;
+ if(pick.b===null)m="ابدئي باختيار فطارك";
+ else if(t>MAX)m="زيادة "+(t-MAX)+" سعر، غيري حاجة أخف";
+ else if(step>3)m=t<MIN?"قليل شوية، زودي حاجة":"يومك مظبوط على الخطة";
+ else m="فاضلك حوالي "+Math.max(0,TARGET-t)+" سعر";
+ $("msg").textContent=m;
+}
+function ripple(e,b){
+ var r=b.getBoundingClientRect(),s=document.createElement("span"),d=Math.max(r.width,r.height)*2;
+ s.className="rip";s.style.width=s.style.height=d+"px";
+ s.style.left=((e.clientX||r.left+r.width/2)-r.left-d/2)+"px";s.style.top=((e.clientY||r.top+r.height/2)-r.top-d/2)+"px";
+ b.appendChild(s);setTimeout(function(){s.remove()},700);
+}
+function go(n){
+ if(busy)return;busy=true;var st=$("stage");
+ st.firstChild&&st.firstChild.classList.add("stg-out");
+ setTimeout(function(){step=n;render(true);busy=false;if(n>3)fin()},reduce?0:250);
+}
+function render(anim){
+ var c=$("chips");c.innerHTML="";
+ K.forEach(function(k,i){var b=document.createElement("button");b.className="chip"+(i===step?" on":"")+(pick[k]!==null&&i!==step?" done":"");b.textContent=NAMES[i];
+  b.onclick=function(){if(i!==step&&(i===0||pick.b!==null))go(i)};c.appendChild(b)});
+ var st=$("stage");st.innerHTML="";
+ if(step>3){summary(st);ring();return}
+ var k=K[step],card=document.createElement("div");card.className="card"+(anim?" stg-in":"");
+ card.innerHTML="<h2>"+TITLES[step]+"</h2>";
+ if(step===0)card.innerHTML+='<p class="hint">كل الاختيارات سعراتها قريبة من بعض، فأي حاجة تختاريها ماشية على الخطة، بشرط تلتزمي بالكميات (شوفي مسطرة الكميات تحت).</p>';
+ else if(step===1&&pick.b!==null)card.innerHTML+='<div class="note">'+(B[pick.b][2]?"فطارك فيه بروتين كويس.":"فطارك بروتينه قليل، فخدي بروتين كويس في الغدا والعشا.")+'</div>';
+ else card.innerHTML+='<p class="hint">اختاري واحد. أي اختيار ماشي على الخطة.</p>';
+ var box=document.createElement("div");box.className="opts";
+ DATA[k].forEach(function(o,i){
+  var b=document.createElement("button");
+  b.className="opt in"+(pick[k]===i?" sel":"");
+  b.style.animationDelay=(i*55+(anim?150:0))+"ms";
+  b.innerHTML='<i class="ck"></i><span>'+o[0]+'</span><small>'+o[1]+' سعر</small>';
+  b.onclick=function(e){if(busy)return;ripple(e,b);pick[k]=i;ring();
+   Array.prototype.forEach.call(box.children,function(x){x.classList.remove("sel")});b.classList.add("sel");
+   setTimeout(function(){go(step+1)},650)};
+  box.appendChild(b)});
+ card.appendChild(box);st.appendChild(card);ring();
+}
+function summary(st){
+ var t=tot(),card=document.createElement("div");card.className="card stg-in";
+ var h='<p class="done-t">يومك جاهز</p>';
+ K.forEach(function(k,i){var o=DATA[k][pick[k]];h+='<div class="row rs" style="animation-delay:'+(.3+i*.15)+'s"><span><b style="color:var(--main)">'+NAMES[i]+':</b> '+o[0]+'</span><b>'+o[1]+'</b></div>'});
+ h+='<div class="row rs" style="animation-delay:.95s"><span><b>الإجمالي</b></span><b>'+t+' سعر</b></div>';
+ card.innerHTML=h;
+ var r=document.createElement("button");r.className="ghost";r.textContent="ابدئي يوم جديد";
+ r.onclick=function(){pick={b:null,l:null,s:null,d:null};go(0)};
+ card.appendChild(r);st.appendChild(card);
+}
+function fin(){
+ if(tot()>MAX||reduce)return;
+ var rb=$("ringbox");rb.classList.remove("pulse");void rb.offsetWidth;rb.classList.add("pulse");
+ var cols=["#d4a85a","#7b2d4e","#e8a0bd","#2f7d5b","#fff2cf"];
+ for(var i=0;i<46;i++){var e=document.createElement("i");e.className="conf";var a=Math.random()*6.283,d=120+Math.random()*190;
+  e.style.setProperty("--dx",Math.cos(a)*d+"px");e.style.setProperty("--dy",(Math.sin(a)*d+140)+"px");e.style.setProperty("--r",(Math.random()*900-450)+"deg");
+  e.style.background=cols[i%5];e.style.animationDelay=Math.random()*.15+"s";document.body.appendChild(e);setTimeout(function(x){x.remove()},2200,e)}
+}
+// tabs
+function pill(b){var p=$("pill");p.style.width=b.offsetWidth+"px";p.style.transform="translateX("+b.offsetLeft+"px)"}
+document.querySelectorAll("nav button").forEach(function(b){b.onclick=function(){
+ document.querySelectorAll("nav button,section").forEach(function(e){e.classList.remove("on")});
+ b.classList.add("on");$(b.dataset.t).classList.add("on");pill(b);window.scrollTo(0,0);
+ if(b.dataset.t==="track")showW()}});
+window.addEventListener("resize",function(){pill(document.querySelector("nav button.on"))});
+// weight
+var W=[];try{W=JSON.parse(localStorage.getItem("lola_w")||"[]")}catch(e){}
+function showW(){
+ var h=$("hist");h.innerHTML="";
+ W.slice().reverse().forEach(function(x){var r=document.createElement("div");r.className="row";r.innerHTML="<span>"+x.d+"</span><b>"+x.v+" كجم</b>";h.appendChild(r)});
+ var cur=W.length?W[W.length-1].v:77,p=Math.max(0,Math.min(100,(77-cur)/12*100));
+ $("pb").style.width="0";setTimeout(function(){$("pb").style.width=p+"%"},60);
+ countTo($("kg"),Math.max(0,77-cur),1);
+ $("pt").textContent=W.length?"كيلو نزلتيهم. فاضل "+Math.max(0,cur-65).toFixed(1)+" كجم للهدف.":"لسه مسجلتيش وزن. من 77 كجم للهدف 65.";
+}
+$("save").onclick=function(){var v=parseFloat($("w").value);if(!v||v<40||v>150)return;
+ W.push({d:new Date().toLocaleDateString("ar-EG"),v:v});try{localStorage.setItem("lola_w",JSON.stringify(W))}catch(e){}
+ $("w").value="";showW()};
+// petals
+var pc=document.createElement("div");pc.className="petals";document.body.appendChild(pc);
+if(!reduce)for(var i=0;i<12;i++){var p=document.createElement("i");p.className="petal";var s=10+Math.random()*14;
+ p.style.cssText="left:"+Math.random()*100+"vw;width:"+s+"px;height:"+s+"px;animation-duration:"+(14+Math.random()*14)+"s;animation-delay:-"+Math.random()*20+"s";pc.appendChild(p)}
+// splash
+var sp=$("splash");function hideSp(){sp.classList.add("hide");setTimeout(function(){sp.remove()},900)}
+sp.onclick=hideSp;setTimeout(hideSp,reduce?0:2300);
+render(false);pill(document.querySelector("nav button.on"));
+</script>
+</body>
+</html>
