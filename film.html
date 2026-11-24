@@ -73,7 +73,7 @@ a:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
  <div class="grain"></div><div class="vig"></div><div class="bar bt"></div><div class="bar bb"></div><div id="prog"></div>
 </div>
 <script>
-var PLAN_URL="revewish.github.io/Lola/lolaa.html",GUIDE_URL="revewish.github.io/Lola/guide.html";
+var PLAN_URL="lolaa.html",GUIDE_URL="guide.html";
 var $=function(i){return document.getElementById(i)};
 function countTo(el,from,to,ms,dec){el.textContent=dec?from.toFixed(dec):from;var t0=performance.now();
  (function f(n){var p=Math.min((n-t0)/ms,1),e=1-Math.pow(1-p,3),v=from+(to-from)*e;el.textContent=dec?v.toFixed(dec):Math.round(v);if(p<1)requestAnimationFrame(f)})(t0)}
