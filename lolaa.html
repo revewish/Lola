@@ -93,6 +93,23 @@ input[type=number]{font:inherit;padding:10px;border-radius:12px;border:1.5px sol
 .bar i::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(100%);animation:sweep 2.2s infinite}
 @keyframes sweep{to{transform:translateX(-100%)}}
 .bigkg{font-family:Amiri,serif;font-size:2.4rem;color:var(--main);line-height:1}
+.werr{margin:8px 0 0;color:var(--bad);font-size:.9rem}
+.chart{margin-top:14px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart .gl{stroke:var(--line);stroke-width:1}
+.chart .goal{stroke:var(--gold);stroke-width:1.5;stroke-dasharray:5 4}
+.chart .ln{fill:none;stroke:var(--main);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.chart .pt{fill:var(--card);stroke:var(--main);stroke-width:2.5}
+.chart .lb{fill:var(--mute);font-size:10px;font-family:Cairo,sans-serif}
+.chart .gt{fill:var(--gold);font-size:10px;font-weight:700;font-family:Cairo,sans-serif}
+.wr{align-items:center}
+.wr .wv{display:flex;align-items:center;gap:8px}
+.wr .wv b{color:var(--gold)}
+.df{font-weight:700;font-size:.8rem}.df.dn{color:var(--ok)}.df.up{color:var(--bad)}
+.wr .ac{display:flex;gap:4px;flex:none}
+.wr .ac button{border:0;background:var(--soft);color:var(--mute);border-radius:10px;min-width:34px;height:30px;padding:0 8px;font:inherit;font-size:.85rem;cursor:pointer}
+.wr .ac button.arm{background:var(--bad);color:#fff;font-weight:700}
+.wr.ed{background:var(--soft);border-radius:12px;padding-right:8px;padding-left:8px}
 /* nav */
 nav{position:fixed;bottom:0;left:0;right:0;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);z-index:9}
 .navin{position:relative;display:flex;max-width:420px;margin:auto;background:var(--soft);border-radius:18px;padding:4px}
@@ -110,6 +127,13 @@ details.guide[open] summary::after{transform:rotate(-135deg);margin-top:4px}
 .gbody{padding:0 18px 16px;animation:fadeup .45s both}
 .gbody .row{font-size:.9rem}.gbody .row span:first-child{font-weight:700;color:var(--main);flex:none;max-width:42%}.gbody .row span:last-child{flex:1}
 .gwarn{background:var(--soft);border-radius:14px;padding:10px 12px;margin-top:12px;font-size:.9rem}
+.bf{display:flex;align-items:center;gap:10px;margin-top:14px;padding:10px 12px;background:var(--soft);border-radius:14px;font-size:.92rem;cursor:pointer}
+.bf input{width:22px;height:22px;accent-color:var(--main);flex:none}
+.bfn{font-size:.85rem;color:var(--mute);margin-top:8px;animation:fadeup .4s both}
+a.yt{color:var(--main);font-weight:600;text-decoration:underline dotted;text-underline-offset:4px;padding:4px 0}
+a.yt small{color:var(--gold);font-weight:600;font-size:.78rem;margin:0 2px}
+a.yt::after{content:"\25B6";display:inline-block;margin-right:6px;font-size:.62rem;color:#fff;background:#e0383e;border-radius:6px;padding:2px 6px;vertical-align:middle}
+.ytn{font-size:.88rem;color:var(--mute);margin:0 0 8px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}#splash{display:none}.row.rs{opacity:1}header small,header h1,header p{opacity:1}}
 </style>
 </head>
@@ -122,9 +146,11 @@ details.guide[open] summary::after{transform:rotate(-135deg);margin-top:4px}
 <div class="card">
  <div class="top">
   <div class="ring" id="ringbox"><svg width="112" height="112" viewBox="0 0 104 104"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7b2d4e"/><stop offset="1" stop-color="#d4a85a"/></linearGradient><linearGradient id="gb"><stop offset="0" stop-color="#b3392f"/><stop offset="1" stop-color="#e0735f"/></linearGradient></defs><circle class="bg" cx="52" cy="52" r="44"/><circle class="fg" id="fg" cx="52" cy="52" r="44"/></svg><b><em id="tot" style="font-style:normal">0</em><span>سعر</span></b></div>
-  <div><div class="msg" id="msg"></div><div class="hint" style="margin:0">هدف اليوم 1400 لـ 1500</div></div>
+  <div><div class="msg" id="msg"></div><div class="hint" style="margin:0" id="tg">هدف اليوم 1400 لـ 1500</div></div>
  </div>
  <div class="chips" id="chips"></div>
+ <label class="bf"><input type="checkbox" id="bf"><span>بترضّعي رضاعة طبيعية؟</span></label>
+ <div class="bfn" id="bfn" hidden>السعرات هنا أعلى (حوالي 1800) عشان اللبن، والنزول بالراحة (نص كيلو في الأسبوع بالكتير) وده أحسن ليكي ولطفلك.</div>
 </div>
 <div id="stage"></div>
 <details class="card guide" id="guide"><summary>مسطرة الكميات (مهمة)</summary><div class="gbody"><div class="row"><span>كف الفراخ أو السمك</span><span>بحجم كف إيدك وسمكها، حوالي 100 جم مطبوخ</span></div><div class="row"><span>نص طبق رز</span><span>كوباية عادية مليانة رز مطبوخ (حوالي 150 جم)</span></div><div class="row"><span>طبق مكرونة صغير</span><span>كوباية ونص مكرونة مطبوخة (حوالي 200 جم)</span></div><div class="row"><span>رغيف بلدي صغير</span><span>بحجم كف إيدك تقريبًا (حوالي 60 جم)</span></div><div class="row"><span>نص رغيف</span><span>نص رغيف بلدي عادي (حوالي 45 جم)</span></div><div class="row"><span>بطاطس متوسطة</span><span>بحجم قبضة إيدك (حوالي 150 جم)</span></div><div class="row"><span>كفتة 4 أصابع</span><span>4 صوابع بحجم صباع الإيد (حوالي 100 جم)</span></div><div class="row"><span>كوباية قريش أو زبادي</span><span>كوباية عادية مليانة (حوالي 150 جم)، والكبيرة حوالي 250 جم</span></div><div class="row"><span>ملعقة زيت</span><span>ملعقة شاي صغيرة (5 مل)، مش ملعقة أكل</span></div><div class="row"><span>ملعقة عسل أو طحينة</span><span>ملعقة أكل مستوية، مش مكوّمة</span></div><div class="row"><span>السلطة</span><span>كبيرة براحتك، بس بملعقة زيت صغيرة أو عصير ليمون</span></div><div class="gwarn">السعرات محسوبة على الشوي والسلق والطبخ بزيت قليل (ملعقة صغيرة للوجبة). القلي أو زيادة الزيت والسمن بيزودوا السعرات بسرعة: ملعقة أكل زيت لوحدها حوالي 135 سعر. وميزان المطبخ أدق من التقدير بالعين، لو متاح.</div></div></details>
@@ -132,12 +158,19 @@ details.guide[open] summary::after{transform:rotate(-135deg);margin-top:4px}
 
 <section id="move">
 <div class="card"><h2>المشي</h2><p class="hint" style="margin:0">6 لـ 8 آلاف خطوة كل يوم. ممكن تقسميهم، 10 دقايق بعد كل وجبة بتفرق. وكل ما مشيتي بسرعة تخليكي تتنفسي أسرع شوية، فايدته أكبر.</p></div>
-<div class="card"><h2>تمرين مرتين في الأسبوع</h2><p class="hint">25 لـ 30 دقيقة، 3 جولات من كل تمرين، وارتاحي دقيقة بين الجولات. مرتين في الأسبوع هو الحد الأدنى اللي بتوصي بيه منظمة الصحة العالمية للعضلات.</p>
-<ul><li>سكوات على كرسي: 12 مرة</li><li>ضغط على الحيطة: 10 مرات</li><li>رفع الحوض وانتي نايمة: 15 مرة</li><li>سحب بأستك أو زجاجتين مياه: 12 مرة</li><li>بلانك على الركبة: 20 ثانية</li></ul></div>
+<div class="card"><h2>ليه الدهون في الكتف والبطن والضهر؟</h2><p class="hint" style="margin:0">دي أماكن بتخزّن فيها دهون كتير بعد الولادة. ومفيش تمرين بيحرق دهون منطقة بعينها، الدهون بتنزل من الجسم كله بالترتيب اللي جسمك بيحدده، والبطن ممكن تبقى من آخر الأماكن. اللي بينزّلها: عجز السعرات والمشي. والتمارين دي بتقوّي العضل اللي تحتها فالشكل والوقفة بيتحسنوا.</p></div>
+<div class="card"><h2>تمرين مرتين في الأسبوع</h2><p class="hint">25 لـ 30 دقيقة، جولتين لـ 3 من كل تمرين، وارتاحي دقيقة بينهم. مرتين في الأسبوع هو الحد الأدنى اللي بتوصي بيه منظمة الصحة العالمية للعضلات.</p>
+<p class="ytn">دوسي على اسم أي تمرين وهيفتحلك يوتيوب يشرحه.</p>
+<b>الضهر والكتف والرجلين</b>
+<ul><li><a class="yt" href="https://www.youtube.com/results?search_query=chair+squat+how+to+do" target="_blank" rel="noopener">سكوات على كرسي <small dir="ltr">Chair Squat</small></a>&#58; 12 مرة</li><li><a class="yt" href="https://www.youtube.com/results?search_query=wall+push+up+how+to+do" target="_blank" rel="noopener">ضغط على الحيطة <small dir="ltr">Wall Push-Up</small></a>&#58; 10 مرات</li><li><a class="yt" href="https://www.youtube.com/results?search_query=glute+bridge+how+to+do" target="_blank" rel="noopener">رفع الحوض <small dir="ltr">Glute Bridge</small></a>، وانتي نايمة: 15 مرة</li><li><a class="yt" href="https://www.youtube.com/results?search_query=bent+over+row+with+water+bottles" target="_blank" rel="noopener">سحب بزجاجتين <small dir="ltr">Bent-Over Row</small></a>&#58; للضهر، 12 مرة</li><li><a class="yt" href="https://www.youtube.com/results?search_query=reverse+fly+with+water+bottles" target="_blank" rel="noopener">فتح الكتف <small dir="ltr">Reverse Fly</small></a>&#58; ميلي لقدام شوية وافتحي دراعيك لجنب بزجاجتين، 12 مرة</li><li><a class="yt" href="https://www.youtube.com/results?search_query=lateral+raise+with+water+bottles" target="_blank" rel="noopener">رفع جانبي بزجاجتين <small dir="ltr">Lateral Raise</small></a>&#58; للكتف، 12 مرة</li></ul>
+<b>البطن (بشكل آمن بعد الولادة)</b>
+<ul><li><a class="yt" href="https://www.youtube.com/results?search_query=postpartum+diaphragmatic+breathing+exercise" target="_blank" rel="noopener">تنفس عميق مع شد البطن <small dir="ltr">Diaphragmatic Breathing</small></a>&#58; 10 مرات</li><li><a class="yt" href="https://www.youtube.com/results?search_query=postpartum+pelvic+tilt+exercise" target="_blank" rel="noopener">إمالة الحوض <small dir="ltr">Pelvic Tilt</small></a>، وانتي نايمة: 12 مرة</li><li><a class="yt" href="https://www.youtube.com/results?search_query=postpartum+heel+slides+exercise" target="_blank" rel="noopener">انزلاق الكعب <small dir="ltr">Heel Slides</small></a>، على الأرض وانتي نايمة: 10 لكل رجل</li><li><a class="yt" href="https://www.youtube.com/results?search_query=bird+dog+exercise+postpartum+diastasis+recti" target="_blank" rel="noopener">دراع ورجل عكس بعض <small dir="ltr">Bird Dog</small></a>، على أربع (لما تتعودي): 8 لكل ناحية</li></ul>
+<div class="note">ممنوع دلوقتي: كرانش، سِت أب، بلانك، ورفع الرجلين. لو شفتي البطن بتطلع في النص زي القبة أو الخيمة وقت أي حركة، وقفي الحركة دي. ويفضّل دكتورة أو أخصائية علاج طبيعي تكشف على انفصال عضلات البطن (بيحصل لكتير من الستات بعد الولادة) قبل ما تبدأي. ولو حسيتي بشد أو وجع عند مكان جرح القيصرية وقت أي حركة، وقفي الحركة دي. ولو حاجة وجعتك أو دوختي، وقفي.</div></div>
 <div class="card"><h2>افتكري</h2><ul>
 <li>مياه حوالي 2 لتر في اليوم، وزيدي في الحر أو لما تمشي كتير.</li><li>بروتين في كل وجبة (بيض، فراخ، سمك، زبادي، قريش، بقوليات).</li><li>سكر وعصاير ومقليات: أقل ما يمكن.</li>
 <li>وجبة حرة واحدة في الأسبوع، وجبة بس مش يوم كامل.</li>
 <li>لو الوزن وقف 3 أسابيع، قللي 100 لـ 150 سعر أو زودي المشي. متجوعيش نفسك.</li>
+<li>لو بترضّعي: فعّلي خيار الرضاعة في تاب الأكل. السعرات هتبقى حوالي 1800 عشان اللبن، والنزول بالراحة (نص كيلو في الأسبوع بالكتير)، وده أحسن ليكي ولطفلك.</li>
 <li>المتوقع نص كيلو في الأسبوع تقريبًا: حوالي 66 لـ 68 بعد 6 شهور، وتوصلي لـ 65 في حوالي 7 لـ 8 شهور. ده نزول سليم وبيثبت. وكل ما التزمتي بالمشي والتمرين، قربتي من الـ 7 شهور.</li>
 <li>لو عندك مرض أو بتاخدي علاج، اسألي دكتور الأول.</li></ul></div>
 </section>
@@ -145,7 +178,8 @@ details.guide[open] summary::after{transform:rotate(-135deg);margin-top:4px}
 <section id="track">
 <div class="card"><h2>وزني</h2><p class="hint">مرة في الأسبوع، نفس اليوم والصبح قبل الأكل.</p>
 <input type="number" id="w" step="0.1" min="40" max="150" placeholder="كجم"><button class="go" id="save">سجّلي</button>
-<div class="bar"><i id="pb"></i></div><div class="bigkg" id="kg">0</div><div class="hint" id="pt" style="margin:0"></div><div id="hist" style="margin-top:10px"></div></div>
+<div class="werr" id="werr" hidden></div>
+<div class="bar"><i id="pb"></i></div><div class="bigkg" id="kg">0</div><div class="hint" id="pt" style="margin:0"></div><div class="chart" id="chart"></div><div id="hist" style="margin-top:10px"></div></div>
 </section>
 </div>
 
@@ -153,13 +187,24 @@ details.guide[open] summary::after{transform:rotate(-135deg);margin-top:4px}
 
 <script>
 var TARGET=1450,MIN=1200,MAX=1500;
-var B=[["بيضتين مسلوقتين + رغيف بلدي صغير + خيار وطماطم + ملعقة قريش",370,1],["شوفان بلبن (50 جم) + موزة + ملعقة لوز مجروش",370,0],["فول بملعقة زيت + نص رغيف + بيضة مسلوقة + سلطة",370,1],["زبادي كوباية كبيرة + شوفان 40 جم + تفاحة + ملعقة عسل",360,0],["أومليت بيضتين بالخضار + توستتين + طماطم",370,1],["جبنة قريش نص كوباية + توستتين + خيار + 5 زيتون",360,1],["3 حبات طعمية في الفرن + سلطة + رغيف صغير + ملعقة طحينة",380,0],["بيضة مسلوقة + قريش + توستتين + برتقالة",365,1],["بان كيك شوفان (بيضة + موزة) + ملعقة عسل + زبادي",370,0],["ساندوتش جبنة رومي لايت + بيضة مسلوقة + خيار وطماطم + فاكهة",360,1]];
-var L=[["فراخ مشوية (كف إيدك) + نص طبق رز + خضار سوتيه + سلطة",590],["سمك مشوي + بطاطس مسلوقة متوسطة + سلطة + رغيف صغير",580],["كفتة مشوية 4 أصابع + سلطة + نص رغيف + ملعقة طحينة",590],["مكرونة (طبق صغير) بصلصة طماطم + صدر فراخ",600],["شوربة عدس كبيرة + فراخ مسلوقة + سلطة + رغيف صغير",570],["ملوخية + فراخ مسلوقة + نص طبق رز",580],["بامية بلحمة + نص طبق رز + سلطة",600],["تونة + بطاطس مسلوقة متوسطة + سلطة + رغيف صغير",575],["كبدة مشوية + سلطة + رغيف صغير + نص طبق رز",590],["خضار مشوي بالفرن + فراخ + نص طبق رز",580],["عدس أصفر + سلطة + رغيف صغير + زبادي",570],["شاورما فراخ بيتي + نص رغيف + سلطة + ملعقة طحينة",590]];
-var S=[["زبادي كوباية + نص موزة",150],["تفاحة + 8 حبات لوز",150],["جزرة + 3 معالق حمص",150],["فشار بدون زيت (كوبايتين)",145],["بيضتين مسلوقتين",150],["جبنة قريش كوباية صغيرة + خيار",150],["تمرتين + كوباية شاي بلبن خفيف",150]];
-var D=[["جبنة قريش كوباية + سلطة كبيرة + رغيف صغير",360],["سلطة تونة (علبة كاملة) + خس + نص رغيف",360],["أومليت بيضتين + سلطة + توستة",360],["زبادي + خيار + جرجير + بيضتين مسلوقتين",350],["شوربة خضار + بيضتين + توستة",350],["ساندوتش فراخ مشوية + سلطة",370],["سلطة فراخ مشوية بزبادي + نص رغيف",360],["سمك مشوي + خضار + نص رغيف",370]];
-var K=["b","l","s","d"],NAMES=["الفطار","الغدا","السناك","العشا"],DATA={b:B,l:L,s:S,d:D};
-var TITLES=["اختاري فطارك","اختاري غداك","اختاري سناك","اختاري عشاك"];
-var pick={b:null,l:null,s:null,d:null},step=0,busy=false;
+var B=[["بيضتين مسلوقتين + رغيف بلدي صغير + خيار وطماطم + ملعقتين قريش",365,1],["شوفان بلبن (40 جم شوفان + كوباية لبن صغيرة 150 مل) + موزة + 5 حبات لوز",365,0],["فول (نص كوباية) بملعقة زيت صغيرة + نص رغيف + بيضة مسلوقة + سلطة",365,1],["زبادي كوباية عادية + شوفان 30 جم + تفاحة + ملعقة عسل",365,0],["أومليت بيضتين بالخضار + توستتين + طماطم",365,1],["جبنة قريش كوباية + توستتين + بيضة مسلوقة + خيار + 3 زيتون",370,1],["3 حبات طعمية في الفرن + سلطة + نص رغيف + ملعقة طحينة",365,0],["بيضة مسلوقة + قريش نص كوباية + توستتين + برتقالة",340,1],["بان كيك شوفان (بيضة + نص موزة + 25 جم شوفان) + ملعقة عسل + زبادي كوباية",370,0],["ساندوتش (نص رغيف + 40 جم جبنة رومي لايت) + بيضة مسلوقة + خيار وطماطم + فاكهة",370,1],["شكشوكة بيضتين بالطماطم + نص رغيف + خيار",350,1],["جبنة بيضاء لايت (60 جم) + رغيف صغير + بيضة مسلوقة + خيار وطماطم + 3 زيتون",355,1],["فول (نص كوباية) بملعقة طحينة + رغيف صغير + طماطم وخيار",370,0],["توستتين + ملعقة زبدة فول سوداني + موزة",340,0]];
+var L=[["فراخ مشوية (كف إيدك) + نص طبق رز + خضار سوتيه + سلطة",590],["سمك مشوي + بطاطس مسلوقة متوسطة + سلطة + رغيف صغير",580],["كفتة مشوية 4 أصابع + سلطة + نص رغيف + ملعقة طحينة",590],["مكرونة (طبق صغير) بصلصة طماطم + صدر فراخ",600],["شوربة عدس كبيرة + فراخ مسلوقة + سلطة + رغيف صغير",570],["ملوخية + فراخ مسلوقة + نص طبق رز",580],["بامية بلحمة + نص طبق رز + سلطة",600],["تونة + بطاطس مسلوقة متوسطة + سلطة + رغيف صغير",575],["كبدة مشوية + سلطة + رغيف صغير + نص طبق رز",590],["خضار مشوي بالفرن + فراخ + نص طبق رز",580],["عدس أصفر + سلطة + رغيف صغير + زبادي",570],["شاورما فراخ بيتي + نص رغيف + سلطة + ملعقة طحينة",590],["فراخ مشوية (كف ونص) + بطاطس مسلوقة متوسطة + سلطة بملعقة زيت صغيرة + نص رغيف",560],["أرز بالخضار (كوباية ونص) + صدر فراخ مشوي (كف إيدك) + سلطة",575],["كشري (طبق صغير حوالي 300 جم) + سلطة + بيضة مسلوقة",545],["صينية بطاطس بالفراخ (بطاطس 200 جم + كف إيدك فراخ) + سلطة + نص رغيف",525]];
+var S=[["زبادي كوباية + نص موزة",150],["تفاحة + 8 حبات لوز",150],["جزرة + 5 معالق حمص",150],["فشار بدون زيت (4 كوبايات) + تمرة",145],["بيضتين مسلوقتين",150],["جبنة قريش كوباية + خيار",145],["تمرتين + كوباية شاي بلبن خفيف",150],["موزة + 6 حبات لوز",145],["3 معالق لبنة + جزرة وخيار",140],["تفاحة + نص ملعقة زبدة فول سوداني",145]];
+var D=[["جبنة قريش كوباية + سلطة كبيرة + رغيف صغير",360],["سلطة تونة (علبة كاملة) + خس + نص رغيف",360],["أومليت بيضتين + سلطة + توستة",360],["زبادي كوباية + خيار + جرجير + بيضتين مسلوقتين + نص رغيف",365],["شوربة خضار + بيضتين + توستة",350],["ساندوتش فراخ مشوية + سلطة",370],["سلطة فراخ مشوية بزبادي + نص رغيف",360],["سمك مشوي + خضار + نص رغيف",370],["فول (كوباية) بملعقة زيت صغيرة + سلطة + نص رغيف",350],["بيضتين مسلوقتين + قريش نص كوباية + خيار وطماطم + توستتين",365],["خضار سوتيه (كوباية ونص) + صدر فراخ (كف إيدك) + نص رغيف",360]];
+var R=[["كوباية لبن + موزة + ملعقة زبدة فول سوداني",345],["ساندوتش قريش وخيار برغيف بلدي صغير + تمرتين",350],["زبادي كبير + حفنة مكسرات (15 جم) + تفاحة",350],["بيضتين مسلوقتين + رغيف صغير + طماطم",345],["حمص (6 معالق) + رغيف صغير + جزرة",355],["كوباية لبن + 5 معالق شوفان + ملعقة عسل",345]];
+var DATA={b:B,l:L,s:S,d:D,r:R},K,NAMES,TITLES,BF=false;
+try{BF=localStorage.getItem("lola_bf")==="1"}catch(e){}
+var pick={b:null,l:null,s:null,d:null,r:null},step=0,busy=false;
+function applyBF(){
+ K=BF?["b","l","s","d","r"]:["b","l","s","d"];
+ NAMES=["الفطار","الغدا","السناك","العشا"].concat(BF?["الرضاعة"]:[]);
+ TITLES=["اختاري فطارك","اختاري غداك","اختاري سناك","اختاري عشاك"].concat(BF?["اختاري إضافة الرضاعة"]:[]);
+ TARGET=BF?1815:1450;MIN=BF?1700:1200;MAX=BF?1870:1500;
+ $("tg").textContent=BF?"هدف اليوم 1750 لـ 1850":"هدف اليوم 1400 لـ 1500";
+ $("bf").checked=BF;$("bfn").hidden=!BF;
+}
+function bfBind(){$("bf").onchange=function(){BF=this.checked;try{localStorage.setItem("lola_bf",BF?"1":"0")}catch(e){}
+ pick={b:null,l:null,s:null,d:null,r:null};step=0;applyBF();render(true);window.scrollTo(0,0)}}
 var $=function(i){return document.getElementById(i)};
 var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches;
 function tot(){var t=0;K.forEach(function(k){if(pick[k]!==null)t+=DATA[k][pick[k]][1]});return t}
@@ -177,7 +222,7 @@ function ring(){
  var m;
  if(pick.b===null)m="ابدئي باختيار فطارك";
  else if(t>MAX)m="زيادة "+(t-MAX)+" سعر، غيري حاجة أخف";
- else if(step>3)m=t<MIN?"قليل شوية، زودي حاجة":"يومك مظبوط على الخطة";
+ else if(step>=K.length)m=t<MIN?"قليل شوية، زودي حاجة":"يومك مظبوط على الخطة";
  else m="فاضلك حوالي "+Math.max(0,TARGET-t)+" سعر";
  $("msg").textContent=m;
 }
@@ -190,14 +235,14 @@ function ripple(e,b){
 function go(n){
  if(busy)return;busy=true;var st=$("stage");
  st.firstChild&&st.firstChild.classList.add("stg-out");
- setTimeout(function(){step=n;render(true);busy=false;if(n>3)fin()},reduce?0:250);
+ setTimeout(function(){step=n;render(true);busy=false;if(n>=K.length)fin()},reduce?0:250);
 }
 function render(anim){
  var c=$("chips");c.innerHTML="";
  K.forEach(function(k,i){var b=document.createElement("button");b.className="chip"+(i===step?" on":"")+(pick[k]!==null&&i!==step?" done":"");b.textContent=NAMES[i];
   b.onclick=function(){if(i!==step&&(i===0||pick.b!==null))go(i)};c.appendChild(b)});
  var st=$("stage");st.innerHTML="";
- if(step>3){summary(st);ring();return}
+ if(step>=K.length){summary(st);ring();return}
  var k=K[step],card=document.createElement("div");card.className="card"+(anim?" stg-in":"");
  card.innerHTML="<h2>"+TITLES[step]+"</h2>";
  if(step===0)card.innerHTML+='<p class="hint">كل الاختيارات سعراتها قريبة من بعض، فأي حاجة تختاريها ماشية على الخطة، بشرط تلتزمي بالكميات (شوفي مسطرة الكميات تحت).</p>';
@@ -222,7 +267,7 @@ function summary(st){
  h+='<div class="row rs" style="animation-delay:.95s"><span><b>الإجمالي</b></span><b>'+t+' سعر</b></div>';
  card.innerHTML=h;
  var r=document.createElement("button");r.className="ghost";r.textContent="ابدئي يوم جديد";
- r.onclick=function(){pick={b:null,l:null,s:null,d:null};go(0)};
+ r.onclick=function(){pick={b:null,l:null,s:null,d:null,r:null};go(0)};
  card.appendChild(r);st.appendChild(card);
 }
 function fin(){
@@ -242,17 +287,65 @@ document.querySelectorAll("nav button").forEach(function(b){b.onclick=function()
 window.addEventListener("resize",function(){pill(document.querySelector("nav button.on"))});
 // weight
 var W=[];try{W=JSON.parse(localStorage.getItem("lola_w")||"[]")}catch(e){}
-function showW(){
+if(!Array.isArray(W))W=[];
+W=W.filter(function(x){return x&&typeof x.v==="number"&&isFinite(x.v)});
+var editI=-1,delI=-1;
+function saveW(){try{localStorage.setItem("lola_w",JSON.stringify(W))}catch(e){}}
+function isoToday(){var n=new Date(),z=function(a){return(a<10?"0":"")+a};return n.getFullYear()+"-"+z(n.getMonth()+1)+"-"+z(n.getDate())}
+function fmtD(x){
+ if(x.t){var p=x.t.split("-");try{return new Date(+p[0],+p[1]-1,+p[2]).toLocaleDateString("ar-EG",{day:"numeric",month:"long"})}catch(e){return x.t}}
+ return x.d||"";
+}
+function chart(){
+ var box=$("chart");
+ if(W.length<2){box.innerHTML='<p class="hint" style="margin:0">الرسم البياني بيظهر بعد ما تسجلي قراءتين.</p>';return}
+ var a=W.slice(-30),GOAL=65,
+  lo=Math.floor(Math.min(GOAL,Math.min.apply(null,a.map(function(x){return x.v})))-1),
+  hi=Math.ceil(Math.max(77,Math.max.apply(null,a.map(function(x){return x.v})))+1),
+  L=32,R=8,T=10,B=8,w=320,h=150,iw=w-L-R,ih=h-T-B,
+  X=function(i){return L+(a.length===1?iw/2:iw*i/(a.length-1))},
+  Y=function(v){return T+ih*(hi-v)/(hi-lo)},
+  g="";
+ [lo,Math.round((lo+hi)/2),hi].forEach(function(t){g+='<line class="gl" x1="'+L+'" x2="'+(w-R)+'" y1="'+Y(t)+'" y2="'+Y(t)+'"/><text class="lb" x="'+(L-5)+'" y="'+(Y(t)+3)+'" text-anchor="end">'+t+'</text>'});
+ g+='<line class="goal" x1="'+L+'" x2="'+(w-R)+'" y1="'+Y(GOAL)+'" y2="'+Y(GOAL)+'"/><text class="gt" x="'+(w-R)+'" y="'+(Y(GOAL)-4)+'" text-anchor="end">الهدف '+GOAL+'</text>';
+ g+='<polyline class="ln" points="'+a.map(function(x,i){return X(i).toFixed(1)+","+Y(x.v).toFixed(1)}).join(" ")+'"/>';
+ a.forEach(function(x,i){g+='<circle class="pt" cx="'+X(i).toFixed(1)+'" cy="'+Y(x.v).toFixed(1)+'" r="3.5"/>'});
+ box.innerHTML='<svg viewBox="0 0 '+w+' '+h+'" dir="ltr" role="img" aria-label="رسم بياني للوزن">'+g+'</svg>';
+}
+function renderHist(){
  var h=$("hist");h.innerHTML="";
- W.slice().reverse().forEach(function(x){var r=document.createElement("div");r.className="row";r.innerHTML="<span>"+x.d+"</span><b>"+x.v+" كجم</b>";h.appendChild(r)});
+ for(var i=W.length-1;i>=0;i--)(function(i){
+  var x=W[i],r=document.createElement("div");r.className="row wr"+(editI===i?" ed":"");
+  var d=i>0?Math.round((x.v-W[i-1].v)*10)/10:0,
+   df=d?'<small class="df '+(d<0?"dn":"up")+'" dir="ltr">'+(d>0?"+":"\u2212")+Math.abs(d).toFixed(1)+"</small>":"";
+  r.innerHTML="<span>"+fmtD(x)+'</span><span class="wv">'+df+"<b>"+x.v+" كجم</b></span>";
+  var ac=document.createElement("span");ac.className="ac";
+  var eb=document.createElement("button");eb.textContent=editI===i?"إلغاء":"تعديل";eb.setAttribute("aria-label","تعديل القراءة");
+  eb.onclick=function(){
+   if(editI===i){editI=-1;$("w").value="";$("save").textContent="سجّلي"}
+   else{editI=i;delI=-1;$("w").value=x.v;$("save").textContent="حفظ التعديل";$("w").focus()}
+   $("werr").hidden=true;renderHist()};
+  var db=document.createElement("button");db.textContent=delI===i?"تأكيد الحذف":"حذف";db.className=delI===i?"arm":"";db.setAttribute("aria-label","حذف القراءة");
+  db.onclick=function(){
+   if(delI===i){W.splice(i,1);if(editI===i){editI=-1;$("w").value="";$("save").textContent="سجّلي"}else if(editI>i)editI--;delI=-1;saveW();showW(true)}
+   else{delI=i;renderHist();setTimeout(function(){if(delI===i){delI=-1;renderHist()}},3500)}};
+  ac.appendChild(eb);ac.appendChild(db);r.appendChild(ac);h.appendChild(r)})(i);
+}
+function showW(keep){
+ renderHist();chart();
  var cur=W.length?W[W.length-1].v:77,p=Math.max(0,Math.min(100,(77-cur)/12*100));
- $("pb").style.width="0";setTimeout(function(){$("pb").style.width=p+"%"},60);
+ if(keep)$("pb").style.width=p+"%";else{$("pb").style.width="0";setTimeout(function(){$("pb").style.width=p+"%"},60)}
  countTo($("kg"),Math.max(0,77-cur),1);
  $("pt").textContent=W.length?"كيلو نزلتيهم. فاضل "+Math.max(0,cur-65).toFixed(1)+" كجم للهدف.":"لسه مسجلتيش وزن. من 77 كجم للهدف 65.";
 }
-$("save").onclick=function(){var v=parseFloat($("w").value);if(!v||v<40||v>150)return;
- W.push({d:new Date().toLocaleDateString("ar-EG"),v:v});try{localStorage.setItem("lola_w",JSON.stringify(W))}catch(e){}
- $("w").value="";showW()};
+$("save").onclick=function(){
+ var v=Math.round(parseFloat($("w").value)*10)/10,er=$("werr");
+ if(!v||v<40||v>150){er.textContent="اكتبي وزن بين 40 و150 كجم.";er.hidden=false;return}
+ er.hidden=true;
+ if(editI>=0&&W[editI]){W[editI].v=v;editI=-1;$("save").textContent="سجّلي"}
+ else{var t=isoToday(),last=W[W.length-1];
+  if(last&&last.t===t)last.v=v;else W.push({t:t,v:v})}
+ delI=-1;saveW();$("w").value="";showW(true)};
 // petals
 var pc=document.createElement("div");pc.className="petals";document.body.appendChild(pc);
 if(!reduce)for(var i=0;i<12;i++){var p=document.createElement("i");p.className="petal";var s=10+Math.random()*14;
@@ -260,7 +353,7 @@ if(!reduce)for(var i=0;i<12;i++){var p=document.createElement("i");p.className="
 // splash
 var sp=$("splash");function hideSp(){sp.classList.add("hide");setTimeout(function(){sp.remove()},900)}
 sp.onclick=hideSp;setTimeout(hideSp,reduce?0:2300);
-render(false);pill(document.querySelector("nav button.on"));
+applyBF();bfBind();render(false);pill(document.querySelector("nav button.on"));
 </script>
 </body>
 </html>

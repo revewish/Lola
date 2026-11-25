@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#000000">
+<title>لولا | النسخة الجديدة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#d9b068;--cream:#f3e6d3;--rose:#e8a0bd}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;background:#03020a;color:var(--cream);overflow:hidden;font-family:Cairo,"Segoe UI",Tahoma,sans-serif}
+#film{position:fixed;inset:0;overflow:hidden}
+.world{position:absolute;inset:0;opacity:0;transition:opacity 2s}
+.world.on{opacity:1}
+.rb{position:absolute;left:-25%;right:-25%;height:38%;filter:blur(50px);opacity:.22;mix-blend-mode:screen;border-radius:50%;animation:rb 11s ease-in-out infinite alternate}
+.rb.a{top:8%;transform:rotate(-8deg)}.rb.b{bottom:6%;animation-delay:-5s;transform:rotate(7deg)}
+@keyframes rb{to{transform:translate(8%,10%) rotate(4deg) scale(1.2);opacity:.38}}
+#cv{position:absolute;inset:0;width:100%;height:100%}
+.grain{position:absolute;inset:-50%;opacity:.1;pointer-events:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");animation:gr .7s steps(6) infinite}
+@keyframes gr{0%{transform:translate(0,0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-4%)}60%{transform:translate(-3%,-2%)}80%{transform:translate(4%,4%)}100%{transform:translate(0,0)}}
+.vig{position:absolute;inset:0;box-shadow:inset 0 0 20vmax rgba(0,0,0,.85);pointer-events:none;z-index:4}
+.bar{position:absolute;left:0;right:0;height:11vh;background:#000;z-index:5}.bt{top:0}.bb{bottom:0}
+#prog{position:absolute;left:0;bottom:11vh;height:2px;width:0;background:linear-gradient(90deg,transparent,var(--gold));z-index:6}
+#stage{position:absolute;top:11vh;bottom:11vh;left:0;right:0}
+.sc{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 7vw;animation:scIn 1.3s both}
+.sc.out{animation:scOut .9s forwards}
+@keyframes scIn{from{opacity:0;transform:scale(.9);filter:blur(10px)}to{opacity:1;transform:none;filter:none}}
+@keyframes scOut{to{opacity:0;transform:scale(1.12);filter:blur(10px)}}
+.z{display:flex;flex-direction:column;align-items:center;gap:2.2vh;animation:kb 12s linear both}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.07)}}
+.t{opacity:0;font-size:clamp(1.35rem,5.8vw,2.2rem);line-height:1.7;font-weight:600;animation:rev 1.5s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes rev{from{opacity:0;filter:blur(14px);transform:translateY(14px) scale(1.08)}to{opacity:1;filter:none;transform:none}}
+.sm{font-size:clamp(.95rem,3.6vw,1.2rem);color:var(--gold);font-weight:400}
+.big{font-family:Amiri,serif;font-size:clamp(3.4rem,18vw,7rem);line-height:1.15;font-weight:700;background:linear-gradient(110deg,#b8893b 25%,#fff3c8 50%,#b8893b 75%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0;animation:rev 1.6s cubic-bezier(.2,.8,.2,1) forwards,shine 4s linear infinite}
+.mid{font-family:Amiri,serif;font-size:clamp(2.2rem,10.5vw,4rem);line-height:1.3;color:var(--gold)}
+@keyframes shine{to{background-position:-250% 0}}
+.ok{color:#7be0b0}.no{color:#ff8a8a;text-decoration:line-through}
+.pop{opacity:0;animation:pp .9s cubic-bezier(.2,1.4,.4,1) forwards}
+@keyframes pp{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:none}}
+.fig{height:min(34vh,250px);overflow:visible}
+.body *{fill:rgba(217,176,104,.07);stroke:var(--gold);stroke-width:1.6}
+.glow .body *{animation:gl 2.6s .3s forwards}
+@keyframes gl{to{fill:rgba(217,176,104,.5);filter:drop-shadow(0 0 10px #d9b068)}}
+.dot{fill:#ff8a5c;opacity:0;animation:dt .8s forwards,pl 1.6s 1s ease-in-out infinite}
+@keyframes dt{to{opacity:1}}
+@keyframes pl{50%{r:9;opacity:.5}}
+.draw{stroke-dasharray:320;stroke-dashoffset:320;animation:dr 2s ease-out forwards}
+@keyframes dr{to{stroke-dashoffset:0}}
+.orbs{display:flex;gap:5vw;justify-content:center}
+.orb{width:min(26vw,104px);height:min(26vw,104px);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.85rem;line-height:1.3;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.3),rgba(62,224,176,.14) 60%);border:1px solid rgba(62,224,176,.5);box-shadow:0 0 28px rgba(62,224,176,.35);opacity:0;animation:orb 1.4s cubic-bezier(.2,1.2,.4,1) forwards,fl 4s 1.5s ease-in-out infinite alternate}
+.orb small{color:var(--gold);font-size:.7rem}
+@keyframes orb{from{opacity:0;transform:translateY(60px) scale(.5)}to{opacity:1;transform:none}}
+@keyframes fl{to{transform:translateY(-10px)}}
+.orbs.q{flex-wrap:wrap;gap:14px;max-width:260px}
+.orb b{font-size:1.6rem;line-height:1;color:#fff}
+.lst{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 14px;max-width:92%}
+.lst span{opacity:0;animation:rev 1s forwards;font-size:clamp(1rem,4.2vw,1.3rem)}
+.tl{width:min(86vw,420px);margin-top:2vh}
+.tr{position:relative;height:10px;border-radius:6px;background:rgba(255,255,255,.14)}
+.fl2{position:absolute;right:0;top:0;bottom:0;width:0;border-radius:6px;background:linear-gradient(270deg,#4aa3d8,#d9b068);animation:fw 2.6s forwards}
+@keyframes fw{to{width:25%}}
+.me{position:absolute;top:-8px;right:54%;width:26px;height:26px;margin-right:-13px;border-radius:50%;background:var(--gold);box-shadow:0 0 24px var(--gold);opacity:0;animation:rev 1s forwards,pl2 1.6s 1s infinite}
+@keyframes pl2{50%{transform:scale(1.3)}}
+.lb{display:flex;justify-content:space-between;font-size:.8rem;color:var(--gold);margin-top:22px}
+.moon{filter:drop-shadow(0 0 22px rgba(185,168,255,.8));animation:fl 4s ease-in-out infinite alternate}
+.drops{display:flex;gap:26px;height:40px}
+.drops i{width:9px;height:14px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:#d6ccff;opacity:0;animation:dp 2.4s infinite}
+@keyframes dp{0%{opacity:0;transform:translateY(-20px)}30%{opacity:1}100%{opacity:0;transform:translateY(34px)}}
+.yt{width:120px;height:84px;border-radius:22px;background:#e0383e;display:flex;align-items:center;justify-content:center;box-shadow:0 0 50px rgba(224,56,62,.55);opacity:0;animation:pp 1s forwards,pl2 2s 1.2s infinite}
+.yt::after{content:"";border-style:solid;border-width:16px 0 16px 28px;border-color:transparent transparent transparent #fff;transform:scaleX(-1)}
+.fin a{display:inline-block;padding:12px 26px;border-radius:40px;text-decoration:none;font-weight:700;color:#1b0b14;background:linear-gradient(135deg,#e9c987,#b8893b);box-shadow:0 0 30px rgba(217,176,104,.4)}
+.fin a.g{background:none;color:var(--gold);box-shadow:none;border:1px solid rgba(217,176,104,.5);font-weight:600;padding:9px 20px;font-size:.9rem}
+.fin .row{display:flex;flex-direction:column;gap:12px;align-items:center;opacity:0;animation:rev 1.4s forwards}
+a:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+.sc.fast{animation-duration:.35s}
+.mt{position:relative;width:90vw;height:38vh}
+.big.cut{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(3rem,15vw,6rem);animation:cutk .5s ease-out both}
+@keyframes cutk{0%{opacity:0;transform:scale(1.4)}14%{opacity:1;transform:scale(1)}86%{opacity:1;transform:scale(.97)}100%{opacity:0;transform:scale(.92)}}
+@media (prefers-reduced-motion:reduce){.grain,.rb,.z,.moon,.orb{animation:none}.t,.big{animation-duration:.01s}}
+</style>
+</head>
+<body>
+<div id="film"><div id="worlds"></div><canvas id="cv"></canvas><div id="stage"></div><div class="grain"></div><div class="vig"></div><div class="bar bt"></div><div class="bar bb"></div><div id="prog"></div></div>
+<script>
+var PLAN_URL="lolaa.html";
+var $=function(i){return document.getElementById(i)};
+var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches;
+function countTo(el,from,to,ms){el.textContent=from;var t0=performance.now();(function f(n){var p=Math.min((n-t0)/ms,1),e=1-Math.pow(1-p,3);el.textContent=Math.round(from+(to-from)*e);if(p<1)requestAnimationFrame(f)})(t0)}
+// عوالم
+var WD=[["#1b1040","#05030f","#7b5cff","#d9b068"],["#5a1f3a","#12060e","#ff8a5c","#e8a0bd"],["#06302b","#030a10","#3ee0b0","#6a8cff"],["#0d2c4a","#04070f","#4aa3d8","#d9b068"],["#262050","#07060f","#b9a8ff","#f3e6d3"],["#3d2810","#0b0705","#d9b068","#7b2d4e"]];
+WD.forEach(function(w){var d=document.createElement("div");d.className="world";d.style.background="radial-gradient(120% 90% at 50% 40%,"+w[0]+","+w[1]+" 72%)";
+ d.innerHTML='<div class="rb a" style="background:'+w[2]+'"></div><div class="rb b" style="background:'+w[3]+'"></div>';$("worlds").appendChild(d)});
+function world(n){[].forEach.call($("worlds").children,function(w,i){w.classList.toggle("on",i===n)})}
+// نجوم
+var cv=$("cv"),cx=cv.getContext("2d"),W,H,stars=[],speed=2;
+function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight}rs();addEventListener("resize",rs);
+for(var i=0;i<150;i++)stars.push({x:Math.random()*2-1,y:Math.random()*2-1,z:Math.random()*.95+.05});
+function proj(s,z){return [W/2+s.x/z*W*.3,H/2+s.y/z*H*.3]}
+function draw(){cx.clearRect(0,0,W,H);
+ stars.forEach(function(s){var z0=s.z;s.z-=speed*.0005;if(s.z<=.03){s.z=1;s.x=Math.random()*2-1;s.y=Math.random()*2-1;z0=1}
+  var a=proj(s,s.z),sz=(1-s.z)*2.4;if(a[0]<0||a[0]>W||a[1]<0||a[1]>H)return;
+  cx.strokeStyle=cx.fillStyle="rgba(243,230,211,"+(.25+(1-s.z)*.75)+")";
+  if(speed>6){var b=proj(s,Math.min(1,s.z+speed*.003));cx.lineWidth=sz*.7;cx.beginPath();cx.moveTo(b[0],b[1]);cx.lineTo(a[0],a[1]);cx.stroke()}
+  else{cx.beginPath();cx.arc(a[0],a[1],sz*.6,0,6.3);cx.fill()}});
+ speed+=(2-speed)*.035;if(!reduce)requestAnimationFrame(draw)}
+draw();
+var FIG='<svg class="fig %C" viewBox="0 0 120 220"><g class="body"><circle cx="60" cy="24" r="14"/><path d="M30 62Q60 48 90 62L98 118Q94 138 84 150L80 214H64L60 160L56 214H40L36 150Q26 138 22 118Z"/></g>%D</svg>';
+var DOTS='<circle class="dot" data-d="1200" cx="32" cy="68" r="6"/><circle class="dot" data-d="1200" cx="88" cy="68" r="6"/><circle class="dot" data-d="3000" cx="60" cy="86" r="6"/><circle class="dot" data-d="4800" cx="60" cy="122" r="7"/>';
+var S=[
+{w:0,d:6800,h:'<div class="t sm" data-d="400">النسخة الجديدة</div><div class="big" data-d="1300">لولا</div><div class="t" data-d="3000">ما بعد الولادة</div>'},
+{w:0,d:7200,h:'<div class="t sm" data-d="300">بعد ما عرفنا إنك</div><div class="t" data-d="1200">ولدتي من 6 شهور تقريبًا…</div><div class="mid t" data-d="2900">اتغيّر كل حاجة</div><div class="t sm" data-d="4300">في الخطة</div>'},
+{w:1,d:9000,h:FIG.replace("%C","").replace("%D",DOTS)+'<div class="t" data-d="1300">الكتف… والضهر…</div><div class="mid t" data-d="3000">والبطن أكتر</div>'},
+{w:1,d:10000,h:FIG.replace("%C","glow").replace("%D","")+'<div class="t" data-d="600">مفيش تمرين بيحرق دهون</div><div class="t" data-d="1500">منطقة بعينها</div><div class="mid t" data-d="3400">الجسم كله بينزل</div><div class="t sm" data-d="5300">والبطن بتتأخر، وده طبيعي</div>'},
+{w:2,d:8000,h:'<div class="t sm" data-d="300">فركّزنا على القوة</div><div class="orbs"><div class="orb" style="animation-delay:.8s">سحب<small>Row</small></div><div class="orb" style="animation-delay:1.5s">فتح الكتف<small>Reverse Fly</small></div><div class="orb" style="animation-delay:2.2s">رفع جانبي<small>Lateral Raise</small></div></div><div class="t" data-d="3400">بزجاجتين مياه بس</div><div class="t sm" data-d="4600">تشدّ الضهر وتفرد الكتف</div>'},
+{w:3,d:10000,h:'<svg width="104" viewBox="0 0 100 120" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path class="draw" d="M50 6L90 22V60C90 88 70 106 50 114C30 106 10 88 10 60V22Z" stroke="#4aa3d8"/><path class="draw" data-d="1600" d="M32 60L45 74L70 44" stroke="#d9b068"/></svg><div class="mid t" data-d="900">البطن بأمان تمارين اخف</div><div class="lst"><span class="no" style="animation-delay:2.4s">كرانش</span><span class="no" style="animation-delay:2.9s">سِت أب</span><span class="no" style="animation-delay:3.4s">بلانك</span></div><div class="lst"><span class="ok" style="animation-delay:4.4s">تنفس عميق</span><span class="ok" style="animation-delay:4.9s">إمالة الحوض</span><span class="ok" style="animation-delay:5.4s">انزلاق الكعب</span><span class="ok" style="animation-delay:5.9s">Bird Dog</span></div>'},
+{w:3,d:9200,h:'<div class="t sm" data-d="300">والقيصرية؟</div><div class="t" data-d="1000">الجرح بيلتئم في حوالي 6 لـ 12 أسبوع</div><div class="tl"><div class="tr"><i class="fl2" style="animation-delay:1.6s"></i><b class="me" data-d="4200"></b></div><div class="lb"><span>الولادة</span><span>انتي هنا</span><span>سنة</span></div></div><div class="t sm" data-d="5400" style="margin-top:3vh">فالمدة كافية. والكشف على عضلات البطن توصية، مش شرط</div>'},
+{w:4,d:9000,h:'<svg class="moon" width="120" viewBox="0 0 100 100"><defs><mask id="mk"><rect width="100" height="100" fill="#fff"/><circle cx="64" cy="40" r="30" fill="#000"/></mask></defs><circle cx="48" cy="52" r="34" fill="#f3e6d3" mask="url(#mk)"/></svg><div class="drops"><i style="animation-delay:0s"></i><i style="animation-delay:.8s"></i><i style="animation-delay:1.6s"></i></div><div class="t sm" data-d="500">لو بترضّعي</div><div class="big" style="font-size:clamp(3rem,16vw,5.5rem)" data-d="1200"><span id="cn">1450</span></div><div class="t" data-d="2600">سعر في اليوم، عشان اللبن</div><div class="t sm" data-d="4200">والنزول بالراحة، نص كيلو في الأسبوع بالكتير</div>',i:function(){setTimeout(function(){countTo($("cn"),1450,1815,3200)},1800)}},
+{w:5,d:7600,h:'<div class="yt"></div><div class="t" data-d="1500">كل تمرين باسمه بالإنجليزي</div><div class="t sm" data-d="3000">دوسي عليه… ويوتيوب يشرحهولك خطوة خطوة</div>'},
+{w:1,d:9400,h:'<div class="t sm" data-d="300">وفي النسخة دي</div><div class="mid t" data-d="900">وجبات أكتر</div><div class="orbs q"><div class="orb" style="animation-delay:1.6s"><b>+4</b><small>فطار</small></div><div class="orb" style="animation-delay:2.2s"><b>+4</b><small>غدا</small></div><div class="orb" style="animation-delay:2.8s"><b>+3</b><small>سناك</small></div><div class="orb" style="animation-delay:3.4s"><b>+3</b><small>عشا</small></div></div><div class="t sm" data-d="4800">من 37 وجبة… بقوا <span id="cm" style="color:#fff;font-weight:700">37</span></div><div class="t sm" data-d="6400">وكل القديم لسه موجود</div>',i:function(){setTimeout(function(){countTo($("cm"),37,51,2400)},5200)}},
+{w:2,d:9000,h:'<div class="t sm" data-d="300">والسعرات</div><div class="mid t" data-d="1000">اتظبطت أكتر</div><div class="lst"><span class="ok" style="animation-delay:2.3s">شوفان بالجرام</span><span class="ok" style="animation-delay:2.8s">فول بالكوباية</span><span class="ok" style="animation-delay:3.3s">فراخ بالكف</span></div><div class="t" data-d="4500">كل رقم على كمية محددة</div><div class="t sm" data-d="5900">أقصى يوم 1490 سعر، و1845 مع الرضاعة</div>'},
+{w:3,d:9800,h:'<svg width="230" viewBox="0 0 200 90" fill="none" stroke-linecap="round" stroke-linejoin="round" style="overflow:visible"><line x1="0" x2="200" y1="78" y2="78" stroke="#d9b068" stroke-width="1.5" stroke-dasharray="5 4"/><path class="draw" d="M5 10L45 24L80 22L120 44L160 52L195 70" stroke="#4aa3d8" stroke-width="3"/><circle class="dot" data-d="1900" cx="195" cy="70" r="5"/></svg><div class="mid t" data-d="900">وزنك برسم بياني</div><div class="lst"><span class="ok" style="animation-delay:2.6s">تعديل أي قراءة</span><span class="ok" style="animation-delay:3.1s">حذف اللي غلط</span><span class="ok" style="animation-delay:3.6s">الفرق عن اللي قبلها</span></div><div class="t sm" data-d="5200">والهدف مرسوم قدامك</div>'},
+{w:4,d:9800,h:'<svg width="96" viewBox="0 0 100 100" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><ellipse class="draw" cx="50" cy="22" rx="30" ry="11" stroke="#4aa3d8"/><path class="draw" data-d="500" d="M20 22V70C20 76 33 81 50 81C67 81 80 76 80 70V22" stroke="#4aa3d8"/><path class="draw" data-d="900" d="M20 46C20 52 33 57 50 57C67 57 80 52 80 46" stroke="#d9b068"/></svg><div class="mid t" data-d="900">تخزين أحسن</div><div class="lst"><span class="ok" style="animation-delay:2.4s">بيتحفظ على موبايلك</span><span class="ok" style="animation-delay:2.9s">بتاريخه الحقيقي</span><span class="ok" style="animation-delay:3.4s">قراءة واحدة في اليوم</span><span class="ok" style="animation-delay:3.9s">الأرقام الغلط متتسجلش</span></div><div class="t sm" data-d="5600">وشكل أحلى، وحركة أنعم</div>'},
+{w:0,d:8000,h:'<div class="t sm" data-d="300">والخلاصة</div><div class="big pop" style="animation-name:pp;animation-delay:1s;font-size:clamp(3rem,16vw,5.5rem)">أمان</div><div class="big pop" style="animation-name:pp;animation-delay:2.4s;font-size:clamp(3rem,16vw,5.5rem)">ثبات</div><div class="big pop" style="animation-name:pp;animation-delay:3.8s;font-size:clamp(3rem,16vw,5.5rem)">صبر</div>'},
+{w:5,d:6000,fast:1,h:'<div class="mt"><div class="big cut" style="animation-delay:300ms;filter:hue-rotate(0deg)">وجبات أكتر</div><div class="big cut" style="animation-delay:800ms;filter:hue-rotate(30deg)">سعرات أدق</div><div class="big cut" style="animation-delay:1300ms;filter:hue-rotate(-40deg)">رسم بياني</div><div class="big cut" style="animation-delay:1800ms;filter:hue-rotate(60deg)">تعديل وحذف</div><div class="big cut" style="animation-delay:2300ms;filter:hue-rotate(-70deg)">تخزين أحسن</div><div class="big cut" style="animation-delay:2800ms;filter:hue-rotate(20deg)">شكل أحلى</div><div class="big cut" style="animation-delay:3300ms;animation-duration:1.8s;font-size:clamp(2.2rem,10.5vw,4rem)">كله في خطة واحدة</div></div>',i:function(){[1,2,3,4,5,0].forEach(function(w,k){timers.push(setTimeout(function(){world(w);speed=16},300+k*500))})}},
+{w:0,last:1,h:'<div class="fin" style="display:flex;flex-direction:column;align-items:center;gap:3vh"><div class="t sm" data-d="300">جاهزة؟</div><div class="big" data-d="1000" style="font-size:clamp(2.8rem,14vw,5.5rem)">يلا نكمل</div><div class="row" style="animation-delay:2.6s"><a href="#" id="a2">افتحي خطتك</a><a class="g" href="#" id="rp">شاهدي الفيلم تاني</a></div></div>',i:function(){$("a2").href=PLAN_URL;$("rp").onclick=function(e){e.preventDefault();start()}}}
+];
+var st=$("stage"),timers=[];
+function play(n){
+ var s=S[n];speed=30;world(s.w);
+ st.innerHTML='<div class="sc'+(s.fast?' fast':'')+'"><div class="z">'+s.h+'</div></div>';var sc=st.firstChild;
+ [].forEach.call(sc.querySelectorAll("[data-d]"),function(e){e.style.animationDelay=e.dataset.d+"ms"});
+ if(s.i)s.i();
+ if(!s.last){timers.push(setTimeout(function(){sc.classList.add("out")},s.d-900));timers.push(setTimeout(function(){play(n+1)},s.d))}
+}
+function start(){
+ timers.forEach(clearTimeout);timers=[];
+ var tot=S.reduce(function(a,s){return a+(s.d||0)},0),p=$("prog");
+ p.style.transition="none";p.style.width="0";void p.offsetWidth;p.style.transition="width "+tot+"ms linear";p.style.width="100%";
+ play(0);
+}
+start();
+</script>
+</body>
+</html>
